@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import data.*;
-//testingtesting
+
 public class Dao {
 	private String url;
 	private String user;
