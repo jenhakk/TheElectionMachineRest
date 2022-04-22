@@ -406,7 +406,7 @@ public class Dao {
 		}
 	}
 
-	// method that inserts 0 for the answers of all questions on answers table based
+	// a method that inserts 0 for the answers of all questions on answers table based
 	// on candidate's id
 	// ! resets one candidate's answers in practice
 	// gets candidate id and question id as parameters
