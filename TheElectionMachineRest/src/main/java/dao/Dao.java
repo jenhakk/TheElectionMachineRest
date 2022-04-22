@@ -47,7 +47,8 @@ public class Dao {
 	// ArrayList. First creates a new ArrayList, then connects to a database. After
 	// executing the
 	// given statement, creates a new object Candidate and then adds this object to
-	// an ArrayList named list
+	// an ArrayList named list.
+	// And more
 	// -Ansku
 	public ArrayList<Candidate> readAllCand() {
 		ArrayList<Candidate> list = new ArrayList<>();
