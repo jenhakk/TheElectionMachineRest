@@ -406,9 +406,9 @@ public class Dao {
 		}
 	}
 
-	// a method that inserts 0 for the answers of all questions on answers table based
+	// method that inserts 0 for the answers of all questions on answers table based
 	// on candidate's id
-	// ! resets one candidate's answers in practice
+	// resets one candidate's answers in practice
 	// gets candidate id and question id as parameters
 	// uses PreparedStatement in while loop to set both parameters in the statement
 	// i = iterations, ques_id = question id, adding 1 to both i and ques_id on each
