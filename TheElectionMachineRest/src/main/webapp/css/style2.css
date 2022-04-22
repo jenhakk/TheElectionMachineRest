@@ -1,0 +1,542 @@
+/* Import font */
+@import
+	url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Chelsea+Market&display=swap')
+	;
+
+/*Max screen size 1920px*/
+@media ( max-width : 1920px) {
+	body {
+		background-size: 35vw;
+		width: 100%;
+	}
+}
+
+/*When screen size is max 2560 px*/
+@media ( max-width : 2560px) {
+	/*Body for all pages*/
+	body {
+		background-color: #FCE029;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		font-family: 'Chelsea Market', cursive;
+	}
+
+	/***************FRONT PAGE STARTS HERE*****************/
+
+	/*Main of the home page for different background-image*/
+	#home .main_home {
+		background-image: url("/pics/miniongroup.png");
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		background-size: 45vw;
+	}
+
+	/*Header 1*/
+	h1 {
+		font-size: 7vw;
+		margin-top: 30px;
+		margin-bottom: 40px;
+	}
+
+	/*Header 2*/
+	h2 {
+		font-size: 2vw;
+		font-weight: 700;
+		text-align: center;
+		padding-top: 0;
+		margin: 0;
+		margin-bottom: 0px;
+	}
+
+	/*Row for "Browse Candidates" and "Answer Questions" boxes*/
+	.row1 {
+		display: flex;
+	}
+	.row1>* {
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+
+	/*Settings for first row and second row buttonlike elements*/
+	.btnindex {
+		width: 250px;
+		display: inline-block;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin-top: 30px;
+		margin: 20px;
+		margin-bottom: 20px;
+		padding: 10px;
+		padding-bottom: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+		color: black;
+	}
+	.btnindex2 {
+		width: max-content;
+		display: inline-block;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin: 20px;
+		margin-bottom: 20px;
+		padding: 10px;
+		padding-left: 30px;
+		padding-right: 30px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+		color: black;
+	}
+	.btnindex:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+	.btnindex2:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+	a:link {
+		text-decoration: none;
+		color: black;
+	}
+	a:visited {
+		color: black;
+	}
+
+	/*************CANDIDATE LOGIN PAGE***************/
+
+	/*Header 2 settings*/
+	#enter {
+		font-size: 1.5vw;
+		font-weight: 700;
+		text-align: center;
+		padding-top: 0;
+		margin: 0;
+		margin-bottom: 40px;
+		margin-top: 200px;
+	}
+
+	/*Row settings for textfield and submit button*/
+	#candnum .row2 {
+		justify-content: center;
+		display: flex;
+		align-items: center;
+		flex-basis: 100%;
+		flex-direction: column;
+	}
+
+	/*Settings for textfield*/
+	.textfield {
+		width: 200px;
+		height: 50px;
+		background-color: white;
+		border: solid 0.5px;
+		margin-top: 100px;
+		padding: 10px;
+		padding-bottom: 20px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+	}
+
+	/*Settings for submit button*/
+	.submit {
+		width: 200px;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin: 30px;
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+	}
+
+	/*Hover for submit button*/
+	.submit:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+
+	/***************BROWSE CANDIDATES****************/
+	#browse .main_browse {
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	/*Shadow effect for profile card frame*/
+	#card-cand {
+		box-shadow: 2px 2px 5px #3A6DF2;
+	}
+	#card-cand:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+
+	/*Frame for image*/
+	.image {
+		position: relative;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	/*Profile picture (img)*/
+	.profile {
+		position: relative;
+		left: -40px;
+		height: 190px;
+		width: 190px;
+		border-radius: 50%;
+		border: 3px solid black;
+		object-fit: cover;
+		object-position: 50% 20%;
+	}
+
+	/*Candidate number*/
+	p.candnum {
+		font-weight: 500;
+		font-size: 90px;
+		position: absolute;
+		top: 90px;
+		left: 50px;
+		font-family: 'Annie Use Your Telescope', cursive;
+	}
+
+	/*Frame for texts*/
+	.card-body {
+		padding-top: 50px;
+		width: 90%;
+	}
+
+	/*Header*/
+	.card-title {
+		font-size: 30px;
+	}
+
+	/*Profile text*/
+	.card-text {
+		font-size: 20px;
+	}
+
+	/*Icon for arrow*/
+	.arrow {
+		position: absolute;
+		top: 49%;
+		right: 15px;
+	}
+
+	/**********************ANSWER QUESTIONS FOR CANDIDATE**********************/
+	#row-ansque {
+		width: 80%;
+	}
+	.candform {
+		position: absolute;
+		left: 10vw;
+		margin-top: 10px;
+	}
+	#but-personal {
+		position: absolute;
+		right: 10vw;
+		width: 200px;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+	}
+	#but-personal:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+	.answer {
+		margin-top: 100px;
+		margin-bottom: 70px;
+	}
+	.question {
+		margin-left: 150px;
+		margin-bottom: 1px;
+	}
+	#ques-card {
+		position: relative;
+		left: 150px;
+		width: 80%;
+		padding: 5px;
+	}
+	#submit-que {
+		position: relative;
+		right: 5vw;
+		width: 200px;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin: 30px;
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+	}
+
+	/*Hover for submit button*/
+	#submit-que:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+
+	/*****************************SHOW QUESTIONS**************************/
+	#showans .main_show {
+		justify-content: center;
+		align-items: center;
+	}
+	.h2show {
+		margin-top: 40px;
+		margin-bottom: 60px;
+	}
+	#tableshow {
+		background-color: white;
+		width: 800px;
+		border: 2px solid black;
+		font-size: 1.25vw;
+	}
+	.btn-primary {
+		min-width: 150px;
+		max-width: 190px;
+		height: fit-content;
+		background-color: white;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin: 20px;
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+		color: black;
+	}
+	.btn-primary:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+	.btnhome {
+		position: absolute;
+		left: 0px;
+		min-width: 150px;
+		max-width: 190px;
+		height: fit-content;
+		background-color: #c5d6ff;
+		box-shadow: 5px 5px 5px #3A6DF2;
+		margin-top: 50px;
+		margin: 20px;
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+		text-align: center;
+		font-size: 1.2vw;
+	}
+	.btnhome:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+	/*****************************CANDIDATE PAGE************************/
+
+	/*Profilepic*/
+	.profile_cand {
+		background-color: white;
+		left: -40px;
+		height: 300px;
+		width: 300px;
+		border-radius: 50%;
+		border: 3px solid black;
+		object-fit: cover;
+		object-position: 50% 20%;
+	}
+
+	/*Candidate number*/
+	#candidate .main_candidate {
+		margin-top: 30px;
+		width: 50%;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.rowcan1 {
+		height: 400px;
+	}
+	p.candnumber {
+		font-weight: 500;
+		font-size: 140px;
+		position: relative;
+		top: -160px;
+		right: 100px;
+		font-family: 'Annie Use Your Telescope', cursive;
+	}
+	.card {
+		border: 2px solid black;
+	}
+	.candname {
+		position: relative;
+		top: -200px;
+	}
+	.row-info {
+		padding-top: 10px;
+	}
+	.textbox {
+		padding-top: 10px;
+		align-items: center;
+		text-align: center;
+		font-size: 20px;
+	}
+	.pin {
+		height: 20px;
+		position: relative;
+	}
+	.party {
+		background-color: #a8bef7;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 25px;
+	}
+	.promote {
+		text-align: center;
+		padding-top: 50px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 20px;
+		font-size: 23px;
+	}
+
+	/*********************CANDITATE PROFILE*****************************/
+	#profile .main_profile {
+		margin-top: 30px;
+		width: 80%;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.h2prof {
+		margin-bottom: 50px;
+	}
+	.candnameprof {
+		position: relative;
+		top: -200px;
+		font-size: 35px;
+	}
+	.infoper {
+		width: 600px;
+		margin-bottom: 8px;
+	}
+	.infoperarea {
+		width: 600px;
+		margin-bottom: 8px;
+		height: 100px;
+	}
+	#label {
+		text-align: left;
+		width: 100px;
+		position: relative;
+		right: 240px;
+	}
+
+	/**********************SUITABLE CANDIDATES************************************/
+	#suit .main_suit {
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.h2_suit {
+		margin-top: 70px;
+		margin-bottom: 70px;
+		font-size: 90px;
+	}
+	.h4_best {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	/*Shadow effect for profile card frame*/
+	#card-cand {
+		box-shadow: 2px 2px 5px #3A6DF2;
+	}
+	#card-cand:hover {
+		background-color: #628bf2;
+		color: white;
+	}
+
+	/*Frame for image*/
+	.image {
+		position: relative;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	/*Profile picture (img)*/
+	.profile {
+		position: relative;
+		left: -20px;
+		height: 190px;
+		width: 190px;
+		border-radius: 50%;
+		border: 3px solid black;
+		object-fit: cover;
+		object-position: 50% 20%;
+	}
+
+	
+	/*Candidate number*/
+	p.candnumsui {
+		font-weight: 500;
+		font-size: 90px;
+		position: absolute;
+		top: 90px;
+		left: 5px;
+		font-family: 'Annie Use Your Telescope', cursive;
+		
+	}
+
+	/*Frame for texts*/
+	.card-body {
+		padding-top: 50px;
+		width: 90%;
+	}
+
+	/*Header*/
+	.card-title {
+		font-size: 30px;
+	}
+
+	/*Profile text*/
+	.card-text {
+		font-size: 20px;
+	}
+
+	/*Icon for arrow*/
+	.arrow {
+		position: absolute;
+		top: 49%;
+		right: 15px;
+	}
+	.percentage {
+		height: 190px;
+		line-height: 190px;
+		text-align: center;
+	}
+	.per {
+		display: inline-block;
+		vertical-align: middle;
+		line-height: normal;
+		font-size: 90px;
+		color: #6892fd;
+		text-shadow: 3px 0 2px black;
+	}
+}
