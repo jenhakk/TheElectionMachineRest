@@ -11,7 +11,7 @@ import data.*;
 //testaussss
 
 
-//muutos
+//muutos//muutos2
 public class Dao {
 	private String url;
 	private String user;
