@@ -12,10 +12,11 @@
  
 		<servlet-name>laptopservice</servlet-name>
 		<servlet-class>
+		
 			org.glassfish.jersey.servlet.ServletContainer
 		</servlet-class>
 		<!--
-			init-param tells in which package REST services are
+			init-param tells in which package REST services are ye
 		-->
 		<init-param>
 		  <param-name>jersey.config.server.provider.packages</param-name>
