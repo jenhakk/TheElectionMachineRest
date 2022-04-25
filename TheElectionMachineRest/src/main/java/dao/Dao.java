@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import data.*;
+//testaussss
 
 public class Dao {
 	private String url;
@@ -48,6 +49,7 @@ public class Dao {
 	// executing the
 	// given statement, creates a new object Candidate and then adds this object to
 	// an ArrayList named list.
+	// And more
 	// -Ansku
 	public ArrayList<Candidate> readAllCand() {
 		ArrayList<Candidate> list = new ArrayList<>();
