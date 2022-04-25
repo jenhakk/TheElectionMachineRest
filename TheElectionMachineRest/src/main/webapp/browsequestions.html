@@ -9,9 +9,36 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style2.css">
     <title>View questions</title>
+    <script>
+    function readData(){
+    	var xmlhttp=new XMLHttpRequest();
+    	xmlhttp.open("GET", "/rest/questions/getquestions", true);
+    	xmlhttp.onreadystatechange = function () {
+    		if (this.readyState == 4 && this.status == 200) {
+    			var question = JSON.parse(xmlhttp.responseText);
+    			var tabletop = `<table class='table table-bordered' id='tableshow'>
+    						    <thead><tr><th scope='col'>#</th><th scope='col'>Question</th></tr></thead>`;
+    						    
+    			var main ="";
+    			for(i = 0; i <question.length; i++) {
+    				main+="<tbody><tr><th scope='row'>"+question[i].question_id+"</th><td><div class='row'><div class='col-9'>"+question[i].question+"</div><div class='col-1'><a href='' style='color: #3A6DF2'>Edit</a></div><div class='col-1'><a href='' style='color: rgb(255, 0, 0)'>Delete</a></div></div></td></tr></tbody>";
+    			}
+    			var tablebottom = "</table>";
+    			var tbl = tabletop + main + tablebottom;
+    			document.getElementById("tableshow").innerHTML = tbl;
+    		}
+    	};
+    	
+    	xmlhttp.send();
+    }
+    window.onload = function() {
+    	readData();
+    }
+    </script>
 </head>
 
 <body id="showans">
+
     
     <main class="main_show">
         <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="index.html" class="btnhome">HOME</a></div>
@@ -21,41 +48,8 @@
         <div class="container-fluid" id="showcon">
 
         <table class="table table-bordered" id="tableshow">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Question</th>
-                   
-                   
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"> 1</th>
-                    <td>
-                    
-                        <div class="row">
-
-                        <div class="col-9">Bananas are the greatest fruitgajriogaiorgjöoasjgrajgajöags.</div>    
-                        <div class="col-1"><a href="" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="" style="color: rgb(255, 0, 0)">Delete</a></div>
-                        </div>
-                    </td>
-                     
-                </tr>
-                <tr>
-                    <th scope="row"> 2</th>
-                    <td>
-                    
-                        <div class="row">
-
-                        <div class="col-9">Yellow is the best color.</div>    
-                        <div class="col-1"><a href="" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="" style="color: rgb(255, 0, 0)">Delete</a></div>
-                        </div>
-                    </td>
-                     
-                </tr>
-                
-            </tbody>
+            
+            
             
         </table>
     </div>
