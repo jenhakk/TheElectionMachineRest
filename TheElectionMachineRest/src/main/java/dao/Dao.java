@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import data.*;
 //testaussss
 
-
-//muutos//muutos2
 public class Dao {
 	private String url;
 	private String user;
