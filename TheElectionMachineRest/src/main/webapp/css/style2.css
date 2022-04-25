@@ -24,6 +24,16 @@
 	}
 
 	/***************FRONT PAGE STARTS HERE*****************/
+	
+	/*Admin login link*/
+    .adminlogin {
+
+        position: absolute;
+        right: 50px;
+        top: 10px;
+        font-size: 20px;
+        
+    }
 
 	/*Main of the home page for different background-image*/
 	#home .main_home {
