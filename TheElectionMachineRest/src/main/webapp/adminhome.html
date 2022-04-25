@@ -11,26 +11,21 @@
     <title>Election machine</title>
 </head>
 
-<body id="home">
-    <main class="main_home">
-    
-    <div class="adminlogin"><a href="adminhome.html"><img src="/pics/icons8-enter-32.png">Admin</a></div>
+<body id="adminhome" style="background-image: url('/pics/admin.png'); background-repeat: no-repeat;background-position: left 150px bottom 100px;background-size: 18vw;">
+    <main class="admin_home">
 
         <div class="container-fluid">
-            <h1>Election machine</h1>
-            <h2>Choose your option</h2>
+            <h1>Admin homepage </h1>
+            <h2 style="margin-top: 80px;">Choose your action</h2>
 
-            <div class="row1 justify-content-center">
+            <div class="row1 justify-content-center" style="margin: 50px;">
+                
+                <div class="col-3"><a href="browsequestions.html" class="btnindex">VIEW<br>QUESTIONS</a></div>
 
-                <div class="col-3"><a href='/ShowAll' class="btnindex">BROWSE<br>CANDIDATES</a></div>
-
-                <div class="col-3"><a href='/AnswerQuestionsUser' class="btnindex">ANSWER<br>QUESTIONS</a></div>
+                <div class="col-3"><a href="viewcanditates.html" class="btnindex">VIEW<br>CANDIDATES</a></div>
 
             </div>
-            <div class="row1 justify-content-around">
-                <div class="col-4"><a href="/jsp/candidatelogin.jsp" class="btnindex2">ARE YOU A CANDIDATE?</a></div>
-            </div>
-        </div>
+       
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
