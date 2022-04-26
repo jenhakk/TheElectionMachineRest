@@ -19,7 +19,7 @@
 <body id="showans">
     
     <main class="main_show">
-        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="index.html" class="btnhome">HOME</a></div>
+        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/index.html" class="btnhome">HOME</a></div>
 
         
         <h2 class="h2show">Questions</h2>
@@ -58,7 +58,7 @@
        
         <div class="row justify-content-end">
             
-            <div class="col-3"><a href="http://localhost:8080/jsp/addquestion.jsp" class="btn btn-primary">ADD NEW QUESTION</a></div>
+            <div class="col-3"><a href="/../jsp/addquestion.jsp" class="btn btn-primary">ADD NEW QUESTION</a></div>
 
         </div>
         </div>
