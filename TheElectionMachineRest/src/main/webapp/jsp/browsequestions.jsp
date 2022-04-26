@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/style2.css">
     <title>View questions</title>
 </head>
-<body>
+
 <body id="showans">
     
     <main class="main_show">
@@ -34,7 +34,7 @@
                    
                 </tr>
             </thead>
-            <c:forEach var="ques" items="${requestScope.ques}">
+            <c:forEach var="ques" items="${requestScope.questions}">
             <tbody>
                 <tr>
                     <th scope="row"><c:out value="${ques.question_id}" /></th>
