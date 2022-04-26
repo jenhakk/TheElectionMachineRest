@@ -34,7 +34,7 @@
                    
                 </tr>
             </thead>
-            <c:forEach var="ques" items="${requestScope.ques}">
+            <c:forEach var="ques" items="${requestScope.questions}">
             <tbody>
                 <tr>
                     <th scope="row"><c:out value="${ques.question_id}" /></th>
