@@ -24,6 +24,7 @@ public class Daojpa {
 	return list;
 	}
 
+
 	
 	public static Questions readQuestion(int ques_id) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
@@ -52,6 +53,17 @@ public class Daojpa {
 		List<Questions> list = getQuestions();
 		return list;
 		
+  }
+
+	
+	public static List<Questions> addQuestion(Questions q) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(q);
+		em.getTransaction().commit();
 		
+		return getQuestions();
+
 	}
 }

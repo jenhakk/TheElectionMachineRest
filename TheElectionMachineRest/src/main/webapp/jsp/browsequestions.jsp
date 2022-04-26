@@ -58,7 +58,7 @@
        
         <div class="row justify-content-end">
             
-            <div class="col-3"><a href="" class="btn btn-primary">ADD NEW QUESTION</a></div>
+            <div class="col-3"><a href="http://localhost:8080/jsp/addquestion.jsp" class="btn btn-primary">ADD NEW QUESTION</a></div>
 
         </div>
         </div>

@@ -12,7 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,6 +20,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import dao.Daojpa;
 import datarest.Questions;
+
 
 @Path("/questions")
 public class Rest {
@@ -85,6 +86,25 @@ public class Rest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// ***************************************************************************************
+
+	@POST
+	@Path("/addquestion")
+	@Produces(MediaType.APPLICATION_XHTML_XML)
+	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
+	public List<Questions> addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
+		Questions q = new Questions(question);
+		System.out.println("happens");
+		request.setAttribute("questions", Daojpa.addQuestion(q));
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Daojpa.addQuestion(q);
+				
+	}
 }
