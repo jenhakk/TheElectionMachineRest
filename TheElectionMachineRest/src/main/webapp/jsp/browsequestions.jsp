@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/style2.css">
     <title>View questions</title>
 </head>
-<body>
+
 <body id="showans">
     
     <main class="main_show">
