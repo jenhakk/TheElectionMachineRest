@@ -1,17 +1,20 @@
 package rest;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import dao.Daojpa;
 
-import datarest.Questions;
 
 @Path("/questions")
 public class Rest {
@@ -21,13 +24,17 @@ public class Rest {
 	@Path("/getquestions")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public static List<Questions> getQuestions() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+	public void getQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+		List list=Daojpa.getQuestions();
+		request.setAttribute("questions", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		
-		List<Questions> list = em.createQuery("select q from Questions q").getResultList();
-		em.close();
-		return list;
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
