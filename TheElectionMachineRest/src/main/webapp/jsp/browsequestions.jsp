@@ -43,7 +43,7 @@
                         <div class="row">
 
                         <div class="col-9"><c:out value="${ques.question}" /></div>    
-                        <div class="col-1"><a href="" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="" style="color: rgb(255, 0, 0)">Delete</a></div>
+                        <div class="col-1"><a href="/rest/questions/showquestion/${ques.question_id}" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="" style="color: rgb(255, 0, 0)">Delete</a></div>
                         </div>
                     </td>
                      
