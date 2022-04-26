@@ -20,4 +20,14 @@ public class Daojpa {
 	em.close();
 	return list;
 	}
+	
+	public static List<Questions> addQuestion(Questions q) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(q);
+		em.getTransaction().commit();
+		
+		return getQuestions();
+	}
 }
