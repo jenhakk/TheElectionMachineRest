@@ -25,6 +25,8 @@ public class Questions implements Serializable{
 	    public Questions() {
 	    }
 	    
+	    
+	    
 	    public List<Questions> getQuestionlist() {
 	    	if (this.questionlist==null) {
 	    		questionlist=new ArrayList<>();
@@ -44,7 +46,15 @@ public class Questions implements Serializable{
 	        this.question = question;
 	    }
 
-	    /**
+	    public Questions(int quesid, String question) {
+			
+	    	this.question_id = quesid;
+	    	this.question = question;
+		}
+
+
+
+		/**
 	     *
 	     * @return
 	     */
