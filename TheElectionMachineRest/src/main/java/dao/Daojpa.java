@@ -29,7 +29,7 @@ public class Daojpa {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Questions question = em.find(Questions.class, ques_id);
-		em.getTransaction().commit();
+		
 		return question;
 
 	}
