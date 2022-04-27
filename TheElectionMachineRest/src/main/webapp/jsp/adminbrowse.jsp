@@ -16,7 +16,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="/css/style2.css">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Browse Candidates</title>
 </head>
@@ -24,21 +24,19 @@
 
 	<main class="main_browse">
 	
-	<div class="col"><a href="/index.html" class="btnhome">HOME</a></div>
+	<div class="col"><a href="/adminhome.html" class="btnhome">HOME</a></div>
 		<h1>Candidates</h1>
+		
+		<h2 style="margin-bottom: 50px;">Choose a candidate to edit or delete them</h2>
 
 		<div class="container-fluid">
 
 			
 			<!-- This forEach gets info from ShowAll.java-file, makes a loop to go through every candidate -->
-			<c:forEach var="cand" items="${requestScope.candilist}">
+			<c:forEach var="cand" items="${requestScope.candidates}">
 			
-				<!-- -------Candidate element starts---------- -->
-				<!-- This div class is a link, it leads user to see more details about selected candidate. ${cand.id} goes with
-				     the link, because it is needed when in ShowSpesificCandidate-servlet we find details of this particular candidate.
-				     So we send the id within this link, so we can request it in the servlet. This servlet leads us to the next page, named
-				     candidatedetails.jsp -->
-				<div class="card" id="card-cand"><a href="/ShowSpesificCandidate?id=${cand.id}">
+				
+				<div class="card" id="card-cand"><a href="/rest/questions/showcandidate/${cand.candidate_id}">
 
 					<div class="row no-gutters">
 						<div class="col-4">
@@ -47,13 +45,13 @@
 								<img class="profile" src="<c:out value="${cand.pic}"/>">
 							</div>
 							<p class="candnum">
-								<c:out value="${cand.id}" />
+								<c:out value="${cand.candidate_id}" />
 							</p>
 						</div>
 						<div class="col-7">
 							<div class="card-body">
 								<h5 class="card-title">
-									<c:out value="${cand.name}" />
+									<c:out value="${cand.lname}" />
 									<c:out value="${cand.fname}" />
 								</h5>
 								<p class="card-text">
@@ -101,4 +99,3 @@
 </body>
 
 </html>
-Mui
