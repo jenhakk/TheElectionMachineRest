@@ -80,6 +80,7 @@ public class Daojpa {
 
 	//************************************METHODS FOR CANDIDATE***************************
 	
+	//Method for getting all candidates from database
 	public static List<Candidates> getCandidates() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -91,6 +92,7 @@ public class Daojpa {
 	
 	}
 	
+	//Method for reading one candidate from database
 	public static Candidates readCandidate(int cand_id) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -101,7 +103,7 @@ public class Daojpa {
 
 	}
 
-
+	//Method to update candidates info (no id or pic)
 	public static Candidates updateCandidate(Candidates cand) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		  EntityManager em = emf.createEntityManager(); em.getTransaction().begin();

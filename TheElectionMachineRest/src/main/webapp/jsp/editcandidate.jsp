@@ -24,27 +24,33 @@
     <main class="main_profile">
     
 
-        <h2 class="h2prof">Your profile</h2>
+        <h2 class="h2prof">Candidate's info</h2>
 
         <div class="container">
 			
             <div class="rowcan1">
                 <div class="col">
                 
-          	
+          	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo">	
                     <image><img class="profile_cand" src="${requestScope.candform.pic}"></image>
+                    
                         <p class="candnumber">${requestScope.candform.candidate_id}</p>
                         <h2 class="candnameprof">${requestScope.candform.fname} ${requestScope.candform.lname}</h2>
+                        
                 </div>
             </div>
 
             <div class="row" id="rowprof-info">
 
                 <div class="col-12">
-                <form action="/rest/questions/updatecandidate" method="POST" class="forminfo">	
+                <div class="form-group">
+               
+               <label for="id" id="label">Picture</label><br>
+                <input type="file" class="infoper" name="file" accept=".png" />
                 
                 <div class="form-group">
              
+             		
                     <input type="hidden" class="infoper" id="pic" name="pic" value="${requestScope.candform.pic}">
                 </div>
                 <div class="form-group">

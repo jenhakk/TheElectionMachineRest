@@ -144,6 +144,7 @@ public class Rest {
 	
 	// ************************Methods for editing candidates*******************************
 	
+	//Gets all candidates from database with Daojpa's getCandidates() into a list and sends it to adminbrowse.jsp
 	@GET
 	@Path("/getcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -162,6 +163,8 @@ public class Rest {
 
 	}
 	
+	//Gets candidate's id by @PathParam from adminbrowse.jsp, gets the candidate's info from database with Daojpa's readCandidate()
+	//and sends it forward to adminviewcand.jsp
 	@GET
 	@Path("/showcandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -181,6 +184,9 @@ public class Rest {
 		}
 	}
 	
+	
+	//Gets candidate's id by @PathParam from adminviewcand.jsp, gets the candidate's info from database with Daojpa's readCandidate()
+		//and sends it forward to editcandidate.jsp
 	@GET
 	@Path("/editcandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -200,6 +206,9 @@ public class Rest {
 		}
 	}
 	
+	//Gets candidates edited info by @FormParams from editcandidate.jsp, 
+	//saves them to new Candidates object and sends it to Daojpa which makes the update to database and returns updated info from database
+	//and sends it to adminviewcand.jsp
 	
 	@POST
 	@Path("/updatecandidate")
