@@ -1,6 +1,7 @@
 package rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -106,5 +107,37 @@ public class Rest {
 		}
 		return Daojpa.addQuestion(q);
 				
+	}
+	
+	// Basically removes a question and answers related to it based on given question id and refreshes the page
+	// Gets question id from browsequestions.jsp and uses it as parameter for Dao method deleteQuestion.
+	// If question is deleted successfully, is getQuestions method called and added it's returned value (list) to a list (created earlier).
+	// Then the list is forwarded by RequestDispatcher as request back to browsequestions.jsp 
+	@GET
+	@Path("/deletequestion/{question_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteQuestion(@PathParam("question_id") int question_id,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+		
+		List<Questions> list = new ArrayList<Questions>();
+		
+		if (Daojpa.deleteQuestion(question_id) == true) {
+			 list = Daojpa.getQuestions();
+		
+		} else {
+			System.out.println("Failed to delete the question.");
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
+		request.setAttribute("questions", list);
+		
+		try {
+			rd.forward(request, response);
+			
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

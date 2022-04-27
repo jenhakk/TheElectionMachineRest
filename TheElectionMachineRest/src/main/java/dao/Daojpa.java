@@ -60,4 +60,21 @@ public class Daojpa {
 		return getQuestions();
 
 	}
+	
+	// method deletes a question based on given question id
+	public static boolean deleteQuestion(int question_id) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Questions question = em.find(Questions.class, question_id);
+		
+		if (question != null) {
+			em.remove(question);
+		}
+
+		em.getTransaction().commit();
+		em.close();
+		
+		return true;
+	}
 }
