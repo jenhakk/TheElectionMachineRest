@@ -64,8 +64,8 @@ public class Rest {
 		}
 	}
 	
-	//Reads form from editquestion.jsp with POST-method and FormParams, makes a new object from it and sends it to Daojpa for updating the question. 
-	//Gets back all the questions from database into a list and sends it to browsequestions.jsp 
+//	//Reads form from editquestion.jsp with POST-method and FormParams, makes a new object from it and sends it to Daojpa for updating the question. 
+//	//Gets back all the questions from database into a list and sends it to browsequestions.jsp 
 	@POST
 	@Path("/updatequestion")
 	@Produces(MediaType.APPLICATION_JSON)
