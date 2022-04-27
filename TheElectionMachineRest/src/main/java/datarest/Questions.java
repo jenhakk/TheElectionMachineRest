@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import data.Answers;
 
 @Entity
 @XmlRootElement
@@ -32,8 +35,8 @@ public class Questions implements Serializable{
 	    @Column (name= "question")
 	    private String question;	    
 	   
-	    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questions", cascade = CascadeType.ALL) //CascadeType.ALL vai .REMOVE? FetchType.EAGER vai .LAZY? 
-		private List<Answers> answerlist;
+	    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "questions", cascade = CascadeType.ALL) //CascadeType.ALL vai .REMOVE? FetchType.EAGER vai .LAZY? 
+		//private List<Answers> answerlist;
 	    
 	    /**
 	     *

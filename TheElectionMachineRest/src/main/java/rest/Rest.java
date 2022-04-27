@@ -20,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import dao.Daojpa;
+import datarest.Candidates;
 import datarest.Questions;
 
 
@@ -140,4 +141,88 @@ public class Rest {
 			e.printStackTrace();
 		}
 	}
+	
+	// ************************Methods for editing candidates*******************************
+	
+	@GET
+	@Path("/getcandidates")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getCandidates(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+		List list = Daojpa.getCandidates();
+		request.setAttribute("candidates", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminbrowse.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	@GET
+	@Path("/showcandidate/{candidate_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getOneCandidate(@PathParam("candidate_id") int cand_id, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		Candidates candid = Daojpa.readCandidate(cand_id);
+		request.setAttribute("candidate", candid);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@GET
+	@Path("/editcandidate/{candidate_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getOneCandidatetoForm(@PathParam("candidate_id") int cand_id, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		Candidates candid = Daojpa.readCandidate(cand_id);
+		request.setAttribute("candform", candid);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/editcandidate.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@POST
+	@Path("/updatecandidate")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
+	public void updateCandidateWithForm(@FormParam("id") int candid, @FormParam("pic") String pic,@FormParam("fname") String fname, @FormParam("lname") String lname, 
+			@FormParam("party") String party, @FormParam("munic") String munic, @FormParam("age") String age, @FormParam("prof") String prof, @FormParam("promo") String promo,@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+				
+		System.out.println(candid + lname + fname + pic + party + munic + age + prof + party);
+		Candidates cand = new Candidates(candid, lname, fname, pic, party, munic, age, promo, prof);
+		cand = Daojpa.updateCandidate(cand);
+		
+		request.setAttribute("candidate", cand);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//********************************************************************************************************************
 }
