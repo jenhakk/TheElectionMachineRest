@@ -50,6 +50,9 @@ public class SaveValueButtonsUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//haetaan kysymysten määrä jsp:ltä käytettäväksi for-looppiin myöhemmin
+		int questions = Integer.parseInt(request.getParameter("questionssize"));
+		
 		// new ArrayList to store end user's answers
 		ArrayList<Integer> userlist = new ArrayList<Integer>();
 

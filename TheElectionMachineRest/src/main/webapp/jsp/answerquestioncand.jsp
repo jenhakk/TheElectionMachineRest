@@ -71,22 +71,26 @@
 
 
 		<h2 class="answer">Answer questions and submit</h2>
-
+		<form action="/SaveValueButtons" method="POST" class="forminfo">
 			<% 
 			ArrayList<Answers> answers = (ArrayList<Answers>)request.getAttribute("answers");
-		
-			for (int i = 1; i < 11; i++)
+			%>
+			<input type="hidden" name="answerssize" value="<%=answers.size()%>">
+			<% 
+			for (int i = 1; i < answers.size()+1; i++)
 		
 			{
 			%>
 			
 
 		<!-- Question element starts -->
-		<form action="/SaveValueButtons" method="POST" class="forminfo">
+		
 		
 			<div>
 				<input type="hidden" name="candidate" value="${candi.id}">
 				<input type="hidden" id="ques" name="quesid" value="<%=i%>"/>
+				
+				
 
 			</div>
 
