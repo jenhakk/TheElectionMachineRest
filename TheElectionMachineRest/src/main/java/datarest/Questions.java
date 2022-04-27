@@ -29,25 +29,10 @@ public class Questions implements Serializable{
 	    @Column (name= "question")
 	    private String question;	    
 	   
-	    
-	    private List<Questions> questionlist;
 	    /**
 	     *
 	     */
 	    public Questions() {
-	    }
-	    
-	    
-	    
-	    public List<Questions> getQuestionlist() {
-	    	if (this.questionlist==null) {
-	    		questionlist=new ArrayList<>();
-	    	}
-	    	return this.questionlist;
-	    }
-	    
-	    public void setQuestionlist(List<Questions> questionlist) {
-	    	this.questionlist=questionlist;
 	    }
 
 	    /**
