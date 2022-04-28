@@ -70,7 +70,7 @@
 
     <div class="col-3">
     
-        <a href="" class="btn btn-primary" style="margin-bottom:50px;margin-left:50px; color:rgb(245, 51, 51)">DELETE</a>
+        <a href="/rest/questions/deletecandidate/${candidate.candidate_id}" class="btn btn-primary" style="margin-bottom:50px;margin-left:50px; color:rgb(245, 51, 51)">DELETE</a>
     </div>
 
     </div>

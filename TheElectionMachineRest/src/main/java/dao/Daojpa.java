@@ -141,5 +141,22 @@ public class Daojpa {
 		
 	}
 	
+	// method deletes a candidate and answers related to given candidate id
+	public static boolean deleteCandidate(int candidate_id) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Candidates cand = em.find(Candidates.class, candidate_id);
+		
+		if (cand != null) {
+			em.remove(cand);
+		}
+
+		em.getTransaction().commit();
+		em.close();
+		
+		return true;
+	}
+	
 	//**************************************************************************************
 }
