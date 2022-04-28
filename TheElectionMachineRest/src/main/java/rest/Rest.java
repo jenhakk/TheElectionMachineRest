@@ -99,6 +99,7 @@ public class Rest {
 		Questions q = new Questions(question);
 		System.out.println("happens");
 		List questions = Daojpa.addQuestion(q);
+		Daojpa.addAnswerZeroToNewQuestion();
 		request.setAttribute("questions", questions);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		try {

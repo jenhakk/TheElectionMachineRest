@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import datarest.Answers;
 import datarest.Candidates;
 import datarest.Questions;
 
@@ -120,6 +121,24 @@ public class Daojpa {
 		  em.getTransaction().commit(); 
 		  Candidates can = readCandidate(cand.getCandidate_id()); 
 		  return can;
+	}
+
+
+	public static void addAnswerZeroToNewQuestion() {
+		List list=getQuestions();
+		
+		Questions en =(Questions) list.get(list.size()-1);
+		System.out.println(en.getQuestion_id()+" "+en.getQuestion());
+		int question_id1 = en.getQuestion_id();
+		int cand_id=1;
+		
+		Answers answer=new Answers(cand_id, question_id1, 0);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(answer);
+		em.getTransaction().commit();
+		
 	}
 	
 	//**************************************************************************************
