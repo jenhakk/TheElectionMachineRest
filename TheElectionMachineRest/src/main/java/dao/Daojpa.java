@@ -125,19 +125,25 @@ public class Daojpa {
 
 
 	public static void addAnswerZeroToNewQuestion() {
-		List list=getQuestions();
+		List<Candidates> candidates=getCandidates();
+		List<Questions> list=getQuestions();
 		
 		Questions en =(Questions) list.get(list.size()-1);
 		System.out.println(en.getQuestion_id()+" "+en.getQuestion());
-		int question_id1 = en.getQuestion_id();
-		int cand_id=1;
+		int question_id = en.getQuestion_id();
 		
-		Answers answer=new Answers(cand_id, question_id1, 0);
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(answer);
-		em.getTransaction().commit();
+		for (int candidate_id=1; candidate_id<=candidates.size(); candidate_id++) {
+			System.out.println("moi");
+			Answers answer=new Answers(candidate_id, question_id, 0);
+			System.out.println(answer);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(answer);
+			em.getTransaction().commit();
+			em.close();
+		}
+		
 		
 	}
 	
