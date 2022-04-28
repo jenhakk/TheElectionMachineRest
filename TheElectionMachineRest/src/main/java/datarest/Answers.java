@@ -2,6 +2,7 @@ package datarest;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,20 +14,24 @@ import javax.persistence.Table;
 
 @Entity   
 @Table(name = "answers")
-//@NamedQuery(name="Answers.findByQID", query="delete from Answers a where a.question_id = :question_id")
 public class Answers implements Serializable {
 	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     
+    @Column(name = "id")
     private int id;
+    @Column(name = "candidate_id")
 	private int candidate_id;
+    @Column(name = "question_id")
 	private int question_id;
+    @Column(name = "answer")
 	private int answer;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn(name = "question_id")
-	private Questions questions;
+//	Let's keep these here for a bit. I think they're unnecessary but if anything goes wrong and these may be related, I'll get them easily back for testing. -Ama	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn(name = "question_id")
+//	private Questions questions;
 	
 	public Answers() {
 		
@@ -64,11 +69,4 @@ public class Answers implements Serializable {
 		this.answer = answer;
 	}
 
-	public Questions getQuestion() {
-		return questions;
-	}
-
-	public void setQuestion(Questions questions) {
-		this.questions = questions;		
-	}
 }
