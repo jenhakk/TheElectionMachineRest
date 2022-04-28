@@ -31,11 +31,17 @@
 
 
 		<h2 class="answer">Answer questions and submit</h2>
+		
+		<form action="/SaveValueButtonsUser" method="POST" class="forminfo">
 		<!-- ArrayList from AnswerQuestionsUser-servlets information -->
 			<% 
 			ArrayList<Questions> questions = (ArrayList<Questions>)request.getAttribute("questions");
+			
+			%>
+			<input type="hidden" name="questionssize" value="<%=questions.size()%>">
+			<% 
 			// for loop for going through the questions we got
-			for (int i = 1; i < 11; i++)
+			for (int i = 1; i < questions.size()+1; i++)
 		
 			{
 			%>
@@ -43,7 +49,7 @@
 
 		<!-- Question element starts -->
 		<!-- This jsp-file sends this forms answers to a SaveValueButtonsUser-servlet -->
-		<form action="/SaveValueButtonsUser" method="POST" class="forminfo">
+		
 		
 			<div>
 				<!-- Hidden element to save questionids value -->

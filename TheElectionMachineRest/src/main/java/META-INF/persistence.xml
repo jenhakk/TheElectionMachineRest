@@ -6,6 +6,7 @@
 	<persistence-unit name="minion">
 		<class>datarest.Questions</class>
 		<class>datarest.Answers</class>
+		<class>datarest.Candidates</class>
 
 		
 		<!-- If using MySQL 5.7 or newer -->
