@@ -95,7 +95,7 @@ public class Rest {
 	@Path("/addquestion")
 	@Produces(MediaType.APPLICATION_XHTML_XML)
 	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
-	public List<Questions> addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
+	public void addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
 		Questions q = new Questions(question);
 		System.out.println("happens");
 		request.setAttribute("questions", Daojpa.addQuestion(q));
@@ -105,14 +105,12 @@ public class Rest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return Daojpa.addQuestion(q);
-				
+		}			
 	}
 	
-	// Basically removes a question and answers related to it based on given question id and refreshes the page
-	// Gets question id from browsequestions.jsp and uses it as parameter for Dao method deleteQuestion.
-	// If question is deleted successfully, is getQuestions method called and added it's returned value (list) to a list (created earlier).
+	// Removes a question and answers related to it based on given question id. Lastly refreshes the page by reading questions from the database.
+	// Gets question id from browsequestions.jsp and uses it as parameter for Daojpa method deleteQuestion.
+	// If question is deleted successfully, is getQuestions method called and it's returned value ('list') is saved to a 'list' (created earlier).
 	// Then the list is forwarded by RequestDispatcher as request back to browsequestions.jsp 
 	@GET
 	@Path("/deletequestion/{question_id}")

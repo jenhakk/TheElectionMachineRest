@@ -35,8 +35,9 @@ public class Questions implements Serializable{
 	    @Column (name= "question")
 	    private String question;	    
 	   
-	    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "questions", cascade = CascadeType.ALL) //CascadeType.ALL vai .REMOVE? FetchType.EAGER vai .LAZY? 
-		//private List<Answers> answerlist;
+//		Let's keep these here for a bit. I think they're unnecessary but if anything goes wrong and these may be related, I'll get them easily back for testing. -Ama	
+//	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questions", cascade = CascadeType.ALL) //CascadeType.ALL vai .REMOVE? FetchType.EAGER vai .LAZY? 
+//	    private List<Answers> answerlist;
 	    
 	    /**
 	     *
@@ -57,7 +58,6 @@ public class Questions implements Serializable{
 	    	this.question_id = quesid;
 	    	this.question = question;
 		}
-
 
 
 		/**
