@@ -37,6 +37,12 @@ public class Answers implements Serializable {
 		
 	}
 	
+	public Answers(int candidate_id, int question_id, int answer) {
+		this.candidate_id=candidate_id;
+		this.question_id=question_id;
+		this.answer=answer;
+	}
+
 	public int getId() {
 		return id;
 	}
