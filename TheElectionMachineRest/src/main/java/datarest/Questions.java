@@ -1,16 +1,22 @@
 package datarest;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import data.Answers;
 
 @Entity
 @XmlRootElement
@@ -29,25 +35,14 @@ public class Questions implements Serializable{
 	    @Column (name= "question")
 	    private String question;	    
 	   
+//		Let's keep these here for a bit. I think they're unnecessary but if anything goes wrong and these may be related, I'll get them easily back for testing. -Ama	
+//	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questions", cascade = CascadeType.ALL) //CascadeType.ALL vai .REMOVE? FetchType.EAGER vai .LAZY? 
+//	    private List<Answers> answerlist;
 	    
-	    private List<Questions> questionlist;
 	    /**
 	     *
 	     */
 	    public Questions() {
-	    }
-	    
-	    
-	    
-	    public List<Questions> getQuestionlist() {
-	    	if (this.questionlist==null) {
-	    		questionlist=new ArrayList<>();
-	    	}
-	    	return this.questionlist;
-	    }
-	    
-	    public void setQuestionlist(List<Questions> questionlist) {
-	    	this.questionlist=questionlist;
 	    }
 
 	    /**
@@ -63,7 +58,6 @@ public class Questions implements Serializable{
 	    	this.question_id = quesid;
 	    	this.question = question;
 		}
-
 
 
 		/**
@@ -97,7 +91,7 @@ public class Questions implements Serializable{
 	    public void setQuestion(String question) {
 	        this.question = question;
 	    }
-
+	    
 	}
 	
 	

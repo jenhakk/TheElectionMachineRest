@@ -41,6 +41,9 @@ public class SaveValueButtons extends HttpServlet {
 		ArrayList<Answers> list = null;
 		
 		//Get candidateid and questionid from answerquestionscand.jsp and change them to integers
+		
+		//kysymysten lukumäärä jsp:ltä käytettäväksi myöhemmin for-loopissa
+		int answers = Integer.parseInt(request.getParameter("answerssize"));
 		int cid = Integer.parseInt(request.getParameter("candidate"));
 		int qid = Integer.parseInt(request.getParameter("quesid"));
 		String cidd = request.getParameter("candidate");

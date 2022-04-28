@@ -19,7 +19,7 @@
 <body id="showans">
     
     <main class="main_show">
-        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/index.html" class="btnhome">HOME</a></div>
+        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/adminhome.html" class="btnhome">HOME</a></div>
 
         
         <h2 class="h2show">Questions</h2>
@@ -43,7 +43,7 @@
                         <div class="row">
 
                         <div class="col-9"><c:out value="${ques.question}" /></div>    
-                        <div class="col-1"><a href="/rest/questions/showquestion/${ques.question_id}" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="" style="color: rgb(255, 0, 0)">Delete</a></div>
+                        <div class="col-1"><a href="/rest/questions/showquestion/${ques.question_id}" style="color: #3A6DF2">Edit</a></div><div class="col-1"><a href="/rest/questions/deletequestion/${ques.question_id}" style="color: rgb(255, 0, 0)">Delete</a></div>
                         </div>
                     </td>
                      

@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="minion">
 		<class>datarest.Questions</class>
+		<class>datarest.Answers</class>
+		<class>datarest.Candidates</class>
+
 		
 		<!-- If using MySQL 5.7 or newer -->
 		<!-- as a root user in the MySQL command prompt give the commands: use 
@@ -26,8 +29,7 @@
 			<property name="javax.persistence.jdbc.user" value="admin" />
 			<property name="javax.persistence.jdbc.password"
 				value="password" />
-			<property name="eclipselink.ddl-generation"
-				value="create-tables" />
+
 		</properties>
 	</persistence-unit>
 </persistence>

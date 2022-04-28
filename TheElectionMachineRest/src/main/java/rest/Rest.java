@@ -1,6 +1,7 @@
 package rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import dao.Daojpa;
+import datarest.Candidates;
 import datarest.Questions;
 
 
@@ -93,7 +95,7 @@ public class Rest {
 	@Path("/addquestion")
 	@Produces(MediaType.APPLICATION_XHTML_XML)
 	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
-	public List<Questions> addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
+	public void addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
 		Questions q = new Questions(question);
 		System.out.println("happens");
 		request.setAttribute("questions", Daojpa.addQuestion(q));
@@ -103,8 +105,131 @@ public class Rest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return Daojpa.addQuestion(q);
-				
+		}			
 	}
+	
+	// Removes a question and answers related to it based on given question id. Lastly refreshes the page by reading questions from the database.
+	// Gets question id from browsequestions.jsp and uses it as parameter for Daojpa method deleteQuestion.
+	// If question is deleted successfully, is getQuestions method called and it's returned value ('list') is saved to a 'list' (created earlier).
+	// Then the list is forwarded by RequestDispatcher as request back to browsequestions.jsp 
+	@GET
+	@Path("/deletequestion/{question_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteQuestion(@PathParam("question_id") int question_id,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+		
+		List<Questions> list = new ArrayList<Questions>();
+		
+		if (Daojpa.deleteQuestion(question_id) == true) {
+			 list = Daojpa.getQuestions();
+		
+		} else {
+			System.out.println("Failed to delete the question.");
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
+		request.setAttribute("questions", list);
+		
+		try {
+			rd.forward(request, response);
+			
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// ************************Methods for editing candidates*******************************
+	
+	//Gets all candidates from database with Daojpa's getCandidates() into a list and sends it to adminbrowse.jsp
+	@GET
+	@Path("/getcandidates")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getCandidates(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+		List list = Daojpa.getCandidates();
+		request.setAttribute("candidates", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminbrowse.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	//Gets candidate's id by @PathParam from adminbrowse.jsp, gets the candidate's info from database with Daojpa's readCandidate()
+	//and sends it forward to adminviewcand.jsp
+	@GET
+	@Path("/showcandidate/{candidate_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getOneCandidate(@PathParam("candidate_id") int cand_id, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		Candidates candid = Daojpa.readCandidate(cand_id);
+		request.setAttribute("candidate", candid);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//Gets candidate's id by @PathParam from adminviewcand.jsp, gets the candidate's info from database with Daojpa's readCandidate()
+		//and sends it forward to editcandidate.jsp
+	@GET
+	@Path("/editcandidate/{candidate_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void getOneCandidatetoForm(@PathParam("candidate_id") int cand_id, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		Candidates candid = Daojpa.readCandidate(cand_id);
+		request.setAttribute("candform", candid);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/editcandidate.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//Gets candidates edited info by @FormParams from editcandidate.jsp, 
+	//saves them to new Candidates object and sends it to Daojpa which makes the update to database and returns updated info from database
+	//and sends it to adminviewcand.jsp
+	
+	@POST
+	@Path("/updatecandidate")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
+	public void updateCandidateWithForm(@FormParam("id") int candid, @FormParam("pic") String pic,@FormParam("fname") String fname, @FormParam("lname") String lname, 
+			@FormParam("party") String party, @FormParam("munic") String munic, @FormParam("age") String age, @FormParam("prof") String prof, @FormParam("promo") String promo,@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+				
+		System.out.println(candid + lname + fname + pic + party + munic + age + prof + party);
+		Candidates cand = new Candidates(candid, lname, fname, pic, party, munic, age, promo, prof);
+		cand = Daojpa.updateCandidate(cand);
+		
+		request.setAttribute("candidate", cand);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//********************************************************************************************************************
 }
