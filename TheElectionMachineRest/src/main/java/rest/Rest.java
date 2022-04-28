@@ -98,7 +98,8 @@ public class Rest {
 	public void addQuestion(@FormParam("question") String question, @Context HttpServletRequest request, @Context HttpServletResponse response) {	
 		Questions q = new Questions(question);
 		System.out.println("happens");
-		request.setAttribute("questions", Daojpa.addQuestion(q));
+		List questions = Daojpa.addQuestion(q);
+		request.setAttribute("questions", questions);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		try {
 			rd.forward(request, response);
