@@ -1,11 +1,16 @@
 package rest;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +22,16 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
+
+
 import dao.Daojpa;
 import datarest.Candidates;
 import datarest.Questions;
@@ -209,7 +222,7 @@ public class Rest {
 	//and sends it to adminviewcand.jsp
 	
 	@POST
-	@Path("/updatecandidate")
+	@Path("/updatecandidates")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded")
 	public void updateCandidateWithForm(@FormParam("id") int candid, @FormParam("pic") String pic,@FormParam("fname") String fname, @FormParam("lname") String lname, 
@@ -232,4 +245,74 @@ public class Rest {
 	}
 	
 	//********************************************************************************************************************
+
+
+		@POST
+		@Path("/updatecandidate")
+		@Consumes({MediaType.MULTIPART_FORM_DATA})
+		public Response uploadFile( @FormDataParam("file") InputStream fileInputStream,
+		//public String uploadFile( @FormDataParam("file") InputStream fileInputStream,
+	            @FormDataParam("file") FormDataContentDisposition fileMetaData, 
+	            @FormDataParam("id") int candid,
+	            @FormDataParam("fname") String fname,
+	            @FormDataParam("lname") String lname,
+	            @FormDataParam("party") String party,
+	            @FormDataParam("munic") String munic,
+	            @FormDataParam("age") String age,
+	            @FormDataParam("prof") String prof,
+	            @FormDataParam("promo") String promo,
+	            @Context HttpServletRequest request,
+				@Context HttpServletResponse response,
+	            @Context ServletContext sc) 
+	            		throws Exception
+		{
+			
+			String UPLOAD_PATH=sc.getRealPath("/pics");
+			
+			
+		    try{
+		        int read = 0;
+		        byte[] bytes = new byte[1024];
+		 
+		        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
+		        //OutputStream out = new FileOutputStream(new File(""+fileMetaData.getFileName()));
+		        while ((read = fileInputStream.read(bytes)) != -1) 
+		        {
+		            out.write(bytes, 0, read);
+		        }
+		        
+		        out.flush();
+		        out.close();
+		        
+		    } 
+		    catch (IOException e){
+		        throw new WebApplicationException("Error while uploading file. Please try again !!");
+		    }
+		    //String img= "<img src='/"+fileMetaData.getFileName()+"'>";
+		    String pic = "/pics/ " + fileMetaData.getFileName();
+		    
+		    //return pic;
+		    return Response.ok("Data ok").build();
+		    
+//		    Candidates cand = new Candidates(candid, lname, fname, pic, party, munic, age, promo, prof);
+//			cand = Daojpa.updateCandidate(cand);
+//			
+//			request.setAttribute("candidate", cand);
+//			RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+//
+//			try {
+//				rd.forward(request, response);
+//			} catch (ServletException | IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		
+		
+	}
 }
+
+
+
+
+

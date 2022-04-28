@@ -16,9 +16,28 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style2.css">
     <title>Edit info</title>
+    
+    
 </head>
 
 <body id="profile">
+
+<script type="text/javascript">
+    
+    //document.getElementById("file-type").onchange = function() {changeImage()};
+    
+    //function changeImage() {
+    	
+    var changeImage = function(event) {	
+    	//document.getElementById("profilepic").src = document.getElementById("input-file").value;
+    	var image = document.getElementById("profilepic");
+    	image.src = URL.createObjectURL(event.target.files[0]);
+    	
+    	
+    	document.getElementById("testi").innerHTML = document.getElementById("input-file").value;
+    };
+
+    </script>
 
 	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a></div>
     <main class="main_profile">
@@ -31,8 +50,8 @@
             <div class="rowcan1">
                 <div class="col">
                 
-          	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo">	
-                    <image><img class="profile_cand" src="${requestScope.candform.pic}"></image>
+          	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
+                    <image><img class="profile_cand" id="profilepic" src="${requestScope.candform.pic}"></image>
                     
                         <p class="candnumber">${requestScope.candform.candidate_id}</p>
                         <h2 class="candnameprof">${requestScope.candform.fname} ${requestScope.candform.lname}</h2>
@@ -42,11 +61,12 @@
 
             <div class="row" id="rowprof-info">
 
+			<p id="testi"></p>
                 <div class="col-12">
                 <div class="form-group">
                
                <label for="id" id="label">Picture</label><br>
-                <input type="file" class="infoper" name="file" accept=".png" />
+                <input type="file" id="input-file" class="infoper" name="file" accept=".png" onchange="changeImage(event)"/>
                 
                 <div class="form-group">
              
