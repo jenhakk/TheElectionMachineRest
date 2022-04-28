@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Answers;
+import data.Questions;
 
 /**
  * Servlet implementation class SaveValueButtons
@@ -43,15 +44,15 @@ public class SaveValueButtons extends HttpServlet {
 		//Get candidateid and questionid from answerquestionscand.jsp and change them to integers
 		
 		//kysymysten lukumäärä jsp:ltä käytettäväksi myöhemmin for-loopissa
-		int answers = Integer.parseInt(request.getParameter("answerssize"));
+		//int answers = Integer.parseInt(request.getParameter("answerssize"));
 		int cid = Integer.parseInt(request.getParameter("candidate"));
 		int qid = Integer.parseInt(request.getParameter("quesid"));
 		String cidd = request.getParameter("candidate");
 		
 		if (dao.getConnection()) {
-
+			ArrayList<Questions> listofques = dao.readAllQuestions();
 			//loop through questions
-			for (int i = 1; i < 11; i++) {
+			for (int i = 1; i < listofques.size()+1; i++) {
 
 				//get every questions' answers value (i)
 				int answer = Integer.parseInt(request.getParameter("ques" + (i)));

@@ -420,9 +420,9 @@ public class Dao {
 	public boolean insertZeroToAnswer(String cid, int qid) {
 		int i = 0;
 		int ques_id = 1;
-
+		ArrayList<Questions> list = readAllQuestions();
 		try {
-			while (i < 10) {
+			while (i < list.size()) {
 				String sql = "insert into answers (candidate_id, question_id, answer) values((select candidate_id from candidates where candidate_id = ?),(select question_id from questions where question_id = ?), 0)";
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1, cid);
