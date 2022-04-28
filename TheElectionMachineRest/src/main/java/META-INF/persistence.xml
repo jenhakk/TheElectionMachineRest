@@ -29,8 +29,7 @@
 			<property name="javax.persistence.jdbc.user" value="admin" />
 			<property name="javax.persistence.jdbc.password"
 				value="password" />
-			<property name="eclipselink.ddl-generation"
-				value="create-tables" />
+
 		</properties>
 	</persistence-unit>
 </persistence>

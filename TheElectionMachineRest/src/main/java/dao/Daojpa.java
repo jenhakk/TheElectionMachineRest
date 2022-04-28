@@ -61,7 +61,7 @@ public class Daojpa {
 
 	}
 	
-	// method deletes a question based on given question id
+	// method deletes a question and answers related to it based on a given question id
 	public static boolean deleteQuestion(int question_id) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
