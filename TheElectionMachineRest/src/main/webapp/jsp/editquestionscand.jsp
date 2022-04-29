@@ -74,7 +74,7 @@
 			Answers c = (Answers)request.getAttribute("ans");
 			
 			int i;
-			for (i = 1; i < 11; i++)
+			for (i = 1; i < answers.size()+1; i++)
 				
 			{
 			%>

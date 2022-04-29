@@ -111,7 +111,9 @@ public class Rest {
 			@Context HttpServletResponse response) {
 		Questions q = new Questions(question);
 		System.out.println("happens");
-		request.setAttribute("questions", Daojpa.addQuestion(q));
+		List questions = Daojpa.addQuestion(q);
+		Daojpa.addAnswerZeroToNewQuestion();
+		request.setAttribute("questions", questions);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		try {
 			rd.forward(request, response);
@@ -121,14 +123,12 @@ public class Rest {
 		}
 	}
 
-	// Removes a question and answers related to it based on given question id.
-	// Lastly refreshes the page by reading questions from the database.
-	// Gets question id from browsequestions.jsp and uses it as parameter for Daojpa
-	// method deleteQuestion.
-	// If question is deleted successfully, is getQuestions method called and it's
-	// returned value ('list') is saved to a 'list' (created earlier).
-	// Then the list is forwarded by RequestDispatcher as request back to
-	// browsequestions.jsp
+	
+	// Removes a question and answers related to given question id. Lastly refreshes the page by reading questions from the database and sending them to browsequestions.jsp.
+	// Gets question id from browsequestions.jsp and uses it as a parameter for daojpa.deleteQuestion().
+	// If question is deleted successfully, is daojpa.getQuestions() called and it's returned value ('list') is saved to a 'list' (created earlier).
+	// Then the list is forwarded by RequestDispatcher as request back to browsequestions.jsp 
+
 	@GET
 	@Path("/deletequestion/{question_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -278,6 +278,36 @@ public class Rest {
 		}
 	}
 	
-	// ********************************************************************************************************************
-
+	// Removes a candidate and answers related to given question id. Lastly refreshes the page by reading questions from the database and sending them to adminbrowse.jsp.
+		// Gets candidate id from browsecandidates.jsp and uses it as parameter for daojpa.deleteCandidate().
+		// If a candidate is deleted successfully, is daojpa.getCandidates() called and it's returned value ('list') is saved to a 'list' (created earlier).
+		// Then the list is forwarded by RequestDispatcher as request back to adminbrowse.jsp 
+		@GET
+		@Path("/deletecandidate/{candidate_id}")
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_JSON)
+		public void deleteCandidate(@PathParam("candidate_id") int candidate_id,
+				@Context HttpServletRequest request,
+				@Context HttpServletResponse response) {
+				
+			List<Candidates> list = new ArrayList<Candidates>();
+			
+			if (Daojpa.deleteCandidate(candidate_id) == true) {
+				list = Daojpa.getCandidates();
+			
+			} else {
+				System.out.println("Failed to delete the candidate.");
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminbrowse.jsp");
+			request.setAttribute("candidates", list);
+			
+			try {
+				rd.forward(request, response);
+				
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+//********************************************************************************************************************
 }

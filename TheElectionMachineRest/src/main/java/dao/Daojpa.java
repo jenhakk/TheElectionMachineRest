@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import datarest.Answers;
 import datarest.Candidates;
 import datarest.Questions;
 
@@ -120,6 +121,47 @@ public class Daojpa {
 		  em.getTransaction().commit(); 
 		  Candidates can = readCandidate(cand.getCandidate_id()); 
 		  return can;
+	}
+
+
+	public static void addAnswerZeroToNewQuestion() {
+		List<Candidates> candidates=getCandidates();
+		List<Questions> list=getQuestions();
+		
+		Questions en =(Questions) list.get(list.size()-1);
+		System.out.println(en.getQuestion_id()+" "+en.getQuestion());
+		int question_id = en.getQuestion_id();
+		
+		for (int candidate_id=1; candidate_id<=candidates.size(); candidate_id++) {
+			System.out.println("moi");
+			Answers answer=new Answers(candidate_id, question_id, 0);
+			System.out.println(answer);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(answer);
+			em.getTransaction().commit();
+			em.close();
+		}
+		
+		
+	}
+	
+	// method deletes a candidate and answers related to given candidate id
+	public static boolean deleteCandidate(int candidate_id) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Candidates cand = em.find(Candidates.class, candidate_id);
+		
+		if (cand != null) {
+			em.remove(cand);
+		}
+
+		em.getTransaction().commit();
+		em.close();
+		
+		return true;
 	}
 	
 	//**************************************************************************************
