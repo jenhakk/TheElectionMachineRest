@@ -397,7 +397,8 @@ public class Dao {
 	// -Amanda
 	public boolean deleteAnswers(String cid) {
 		try {
-			String sql = "delete from answers where candidate_id = ?";
+			//String sql = "delete from answers where candidate_id = ?";
+			String sql = "update answers set answer=0 where candidate_id = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, cid);
 			statement.executeUpdate();

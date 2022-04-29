@@ -102,28 +102,28 @@
 				
 					<div>
 						<input type="radio" id="strdis"
-							name="ques<%=i%>" value="1"> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="1"> 
 							<label for="strdis">Strongly disagree</label>
 
 					</div>
 					<div>
 						<input type="radio" id="dis"
-							name="ques<%=i%>" value="2">
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="2">
 							<label for="dis">Disagree</label>
 					</div>
 					<div>
 						<input type="radio" id="ntrl"
-							name="ques<%=i%>" value="3" checked> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="3" checked> 
 							<label for="ntrl">Neutral</label>
 					</div>
 					<div>
 						<input type="radio" id="agr"
-							name="ques<%=i%>" value="4"> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="4"> 
 							<label for="agr">Agree</label>
 					</div>
 					<div>
 						<input type="radio" id="stragr"
-							name="ques<%=i%>" value="5"> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="5"> 
 							<label for="stragr">Strongly agree</label>
 					</div>
 

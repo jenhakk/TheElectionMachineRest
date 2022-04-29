@@ -41,13 +41,12 @@ public class DeleteAnswers extends HttpServlet {
 			if (dao.deleteAnswers(cid) == true ) {
 				
 				// if insertZeroToAnswer is successful -> call readAnsw(cid) and set list it returns to Arraylist list
-				if (dao.insertZeroToAnswer(cid, qid) == true) {
-					list = dao.readAnsw(cid);
-					System.out.println("readAnsw() true" + cid);
-					
-				} else {
-					System.out.println("readAnsw() false");
-				}
+				/*
+				 * if (dao.insertZeroToAnswer(cid, qid) == true) { list = dao.readAnsw(cid);
+				 * System.out.println("readAnsw() true" + cid);
+				 * 
+				 * } else { System.out.println("readAnsw() false"); }
+				 */
 				System.out.println("deleteAnswers() true");
 			
 			} else {
@@ -57,7 +56,7 @@ public class DeleteAnswers extends HttpServlet {
 		} else {
 			System.out.println("No connection to database");
 		}
-
+		list = dao.readAnsw(cid);
 		// sending reseted candidate's answers as list to showanswerstocandidate.jsp via RequestDispatcher
 		request.setAttribute("answers", list);
 		

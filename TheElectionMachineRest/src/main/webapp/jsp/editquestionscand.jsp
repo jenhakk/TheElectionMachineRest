@@ -97,28 +97,28 @@
 				
 					<div>
 						<input type="radio" id="strdis"
-							name="ques<%=i%>" value="1" <%if ((answers.get(i-1).getAnswer()) == 1) {out.println("checked"); }%>>  
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="1" <%if ((answers.get(i-1).getAnswer()) == 1) {out.println("checked"); }%>>  
 							<label for="strdis">Strongly disagree</label>	
 
 					</div>
 					<div>
 						<input type="radio" id="dis"
-							name="ques<%=i%>" value="2" <%if ((answers.get(i-1).getAnswer()) == 2) {out.println("checked"); }%>>
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="2" <%if ((answers.get(i-1).getAnswer()) == 2) {out.println("checked"); }%>>
 							<label for="dis">Disagree</label>
 					</div>
 					<div>
 						<input type="radio" id="ntrl"
-							name="ques<%=i%>" value="3" <%if ((answers.get(i-1).getAnswer()) == 3) {out.println("checked"); }%>> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="3" <%if ((answers.get(i-1).getAnswer()) == 3) {out.println("checked"); }%>> 
 							<label for="ntrl">Neutral</label>
 					</div>
 					<div>
 						<input type="radio" id="agr"
-							name="ques<%=i%>" value="4" <%if ((answers.get(i-1).getAnswer()) == 4) {out.println("checked"); }%>> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="4" <%if ((answers.get(i-1).getAnswer()) == 4) {out.println("checked"); }%>> 
 							<label for="agr">Agree</label>
 					</div>
 					<div>
 						<input type="radio" id="stragr"
-							name="ques<%=i%>" value="5" <%if ((answers.get(i-1).getAnswer()) == 5) {out.println("checked"); }%>> 
+							name="ques<%=(answers.get(i-1).getQuess_id())%>" value="5" <%if ((answers.get(i-1).getAnswer()) == 5) {out.println("checked"); }%>> 
 							<label for="stragr">Strongly agree</label>
 					</div>
 
