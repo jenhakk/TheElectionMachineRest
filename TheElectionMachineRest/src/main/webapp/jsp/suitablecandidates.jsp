@@ -52,7 +52,7 @@
                                 <div class="col-4">
 
                                     <div class="image"><img class="profile"
-                                            src="<c:out value="${cand.pic}"/>"></div>
+                                            src="<c:out value="/pics/${cand.pic}"/>"></div>
                                     <p class="candnumsui"><c:out value="${cand.id}" /></p>
                                 </div>
                                 <div class="col-7">
