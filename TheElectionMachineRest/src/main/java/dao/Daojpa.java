@@ -104,7 +104,7 @@ public class Daojpa {
 
 	}
 
-	//Method to update candidates info (no id or pic)
+	//Method to update candidates info
 	public static Candidates updateCandidate(Candidates cand) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		  EntityManager em = emf.createEntityManager(); em.getTransaction().begin();

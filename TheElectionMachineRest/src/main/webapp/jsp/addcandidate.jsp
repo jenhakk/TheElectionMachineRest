@@ -40,7 +40,7 @@
 
     </script>
 
-	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a></div>
+	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/adminhome.html" class="btnhome">HOME</a></div>
     <main class="main_profile">
     
 
@@ -48,11 +48,11 @@
 
         <div class="container">
 			
-            <div class="rowcan1">
+            <div class="rowcan1" style="height: 300px;">
                 <div class="col">
                 
           	<form action="/rest/questions/addcandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
-                    <image><img class="profile_cand" id="profilepic" src=""></image>
+                    <image style="margin-bottom:0;"><img class="profile_cand" id="profilepic" src="/pics/emptyminion.png"></image>
                     
                        
                         <h2 class="candnameprof"></h2>
