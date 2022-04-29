@@ -78,7 +78,7 @@
 
 			<div class="row justify-content-center">
             
-            <div class="col-3"><a href="/../jsp/addnewcand.jsp" class="btn btn-primary">ADD NEW CANDIDATE</a></div>
+            <div class="col-3"><a href="/../jsp/addcandidate.jsp" class="btn btn-primary">ADD NEW CANDIDATE</a></div>
 
         </div>
 
