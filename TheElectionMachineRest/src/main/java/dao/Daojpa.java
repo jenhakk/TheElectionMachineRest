@@ -163,6 +163,31 @@ public class Daojpa {
 		
 		return true;
 	}
+
+
+	public static Candidates addCandidate(Candidates c) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(c);
+		em.getTransaction().commit();
+		  
+		  if (c != null) {
+		  
+		  em.merge(c); 
+		  
+		  } else {
+			  System.out.println("eip");
+		  }
+	  
+		List<Candidates> list=getCandidates();
+		Candidates en =(Candidates) list.get(list.size()-1);
+		System.out.println(en.getCandidate_id());
+		int candidate_id = en.getCandidate_id();
+		  
+		Candidates can = readCandidate(candidate_id); 
+		return can;
+	}
 	
 	//**************************************************************************************
 }

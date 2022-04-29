@@ -73,6 +73,18 @@ public class Candidates implements Serializable {
 		this.promo = promo;
 		this.prof = prof;
 	}
+	
+	public Candidates(String lname, String fname, String pic, String party, String munic, String age,
+			String promo, String prof) {
+		this.lname = lname;
+		this.fname = fname;
+		this.pic = pic;
+		this.party = party;
+		this.munic = munic;
+		this.age = age;
+		this.promo = promo;
+		this.prof = prof;
+	}
 
 
 	/**
