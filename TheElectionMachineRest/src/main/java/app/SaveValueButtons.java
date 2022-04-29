@@ -50,15 +50,17 @@ public class SaveValueButtons extends HttpServlet {
 		String cidd = request.getParameter("candidate");
 		
 		if (dao.getConnection()) {
-			ArrayList<Questions> listofques = dao.readAllQuestions();
+			ArrayList<Questions> answersize=dao.readAllQuestions();
 			//loop through questions
-			for (int i = 1; i < listofques.size()+1; i++) {
-
+			for (int i = 1; i < answersize.size()+1; i++) {
+				int question_id=answersize.get(i-1).getId();
+				
+				System.out.println("i = "+i+ " ques= "+request.getParameter("ques" + (i)));
 				//get every questions' answers value (i)
-				int answer = Integer.parseInt(request.getParameter("ques" + (i)));
+				int answer = Integer.parseInt(request.getParameter("ques" + (question_id)));
 
 				//create object from Answers that get candidates id, question id and answer
-				Answers a = new Answers(cid, qid, answer);
+				Answers a = new Answers(cid, question_id, answer);
 
 				//Send object as a parameter to dao's updateAnswers() and save results to the list
 				
