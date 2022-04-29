@@ -35,9 +35,7 @@
     	//document.getElementById("profilepic").src = document.getElementById("input-file").value;
     	var image = document.getElementById("profilepic");
     	image.src = URL.createObjectURL(event.target.files[0]);
-    	
-    	
-    	document.getElementById("testi").innerHTML = document.getElementById("input-file").value;
+    
     };
 
     </script>
@@ -54,80 +52,63 @@
                 <div class="col">
                 
           	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
-                    <image><img class="profile_cand" id="profilepic" src="${requestScope.candform.pic}"></image>
+                    <image><img class="profile_cand" id="profilepic" src=""></image>
                     
-                        <p class="candnumber">${requestScope.candform.candidate_id}</p>
-                        <h2 class="candnameprof">${requestScope.candform.fname} ${requestScope.candform.lname}</h2>
+                       
+                        <h2 class="candnameprof"></h2>
                         
                 </div>
             </div>
 
             <div class="row" id="rowprof-info">
 
-			<p id="testi"></p>
                 <div class="col-12">
-                <!-- <div class="form-group">
+                <div class="form-group">
                
                <label for="id" id="label">Picture</label><br>
                 <input type="file" id="input-file" class="infoper" name="file" accept=".png" onchange="changeImage(event)"/>
     
-     			</div> -->
-				<div class="form-group">
-				
-                <label>Choose existing image</label>  
-                
-                <select name="pictures" onchange="document.getElementById('profilepic').src = this.value;">
-			    <c:forEach items="${pics}" var="pics">
-			        <option value="${pics}" onchange="changeImage(event)">${pics}</option>
-			    </c:forEach>
-				
-				</select>
-		
-			  </div>
+     			</div>
 			 
                 <div class="form-group">
              
              		
-                    <input type="hidden" class="infoper" id="pic" name="pic" value="${requestScope.candform.pic}">
-                </div>
-                <div class="form-group">
-                    <label for="id" id="label">Number</label><br>
-                    <input type="text" class="infoper" id="id" name="id" value="${requestScope.candform.candidate_id}" readonly>
+                    <input type="hidden" class="infoper" id="pic" name="pic" value="">
                 </div>
             
                 <div class="form-group">
                     <label for="fname" id="label">First name</label><br>
-                    <input type="text" class="infoper" id="fname" name="fname" value="${requestScope.candform.fname}" required>
+                    <input type="text" class="infoper" id="fname" name="fname" value="" required>
                 </div>
 
                 <div class="form-group">
                     <label for="lname" id="label">Last name</label><br>
-                    <input type="text" class="infoper" id="lname" name="lname" value="${requestScope.candform.lname}" required>
+                    <input type="text" class="infoper" id="lname" name="lname" value="" required>
                 </div>
 
                 <div class="form-group">
                     <label for="party" id="label">Party</label><br>
-                    <input type="text" class="infoper" id="party" name="party" value="${requestScope.candform.party}" required>
+                    <input type="text" class="infoper" id="party" name="party" value="" required>
                 </div>
 
                 <div class="form-group">
                     <label for="munic" id="label">Municipality</label><br>
-                    <input type="text" class="infoper" id="munic" name="munic" value="${requestScope.candform.munic}" required>
+                    <input type="text" class="infoper" id="munic" name="munic" value="" required>
                 </div>
 
                 <div class="form-group">
                     <label for="age" id="label">Age</label><br>
-                    <input type="text" class="infoper" id="age" name="age" value="${requestScope.candform.age}" required>
+                    <input type="text" class="infoper" id="age" name="age" value="" required>
                 </div>
  
                 <div class="form-group">
                     <label for="prof" id="label">Profession</label><br>
-                    <input type="text" class="infoper" id="prof" name="prof" value="${requestScope.candform.prof}" required>
+                    <input type="text" class="infoper" id="prof" name="prof" value="" required>
                 </div>
 
                 <div class="form-group">
                     <label for="promo" id="label">Promote</label><br>
-                    <textarea type="text" class="infoperarea" id="promo" name="promo" required>${requestScope.candform.promo}</textarea>
+                    <textarea type="text" class="infoperarea" id="promo" name="promo" required></textarea>
                 
                 </div>
                 
