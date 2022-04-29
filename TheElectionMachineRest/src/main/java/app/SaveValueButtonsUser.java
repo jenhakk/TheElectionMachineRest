@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Answers;
 import data.Candidate;
+import data.Questions;
 
 /**
  * Servlet implementation class SaveValueButtonsUser
@@ -55,16 +56,19 @@ public class SaveValueButtonsUser extends HttpServlet {
 		
 		// new ArrayList to store end user's answers
 		ArrayList<Integer> userlist = new ArrayList<Integer>();
-
+		if (dao.getConnection()) {
+			ArrayList<Questions> answersize=dao.readAllQuestions();
+			System.out.println(answersize);
 		// loop through the number of questions
-		for (int i = 1; i < 11; i++) {
-
+		for (int i = 1; i < answersize.size()+1; i++) {
+			int question_id=answersize.get(i-1).getId();
 			// search the answers value (i) from the jsp-file "answerquestionsuser"
-			int answer = Integer.parseInt(request.getParameter("ques" + (i)));
+			int answer = Integer.parseInt(request.getParameter("ques" + (question_id)));
 
 			// add the answer to a list "userlist"
 			userlist.add(answer);
 
+		}
 		}
 		// new linkedhashmap candpoints to save the three best candidates for the end user  
 		LinkedHashMap<Integer, Integer> candpoints = new LinkedHashMap<Integer, Integer>();
@@ -240,9 +244,10 @@ public class SaveValueButtonsUser extends HttpServlet {
 
 		// candidate number
 		int candidate = 1;
-
+		if (dao.getConnection()) {
+			ArrayList<Candidate> list = dao.readAllCand();
 		// loop through the number of candidates, at this point we got seven candidates
-		for (int j = 0; j < 7; j++) {
+		for (int j = 0; j < list.size(); j++) {
 
 			// Initialize new variable where save similar answers of candidate and end-user, method "compareAnswers" is called, it gets
 			// userlist and candidates id-numbers as a parameter
@@ -253,6 +258,7 @@ public class SaveValueButtonsUser extends HttpServlet {
 
 			// next candidate
 			candidate++;
+		}
 		}
 		// print candidates and them points
 		for (Map.Entry<Integer, Integer> m : candpoints.entrySet()) {
