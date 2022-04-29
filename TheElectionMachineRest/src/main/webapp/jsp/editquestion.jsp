@@ -18,7 +18,7 @@
 
 <body id="profile">
 
-    <div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a>
+    <div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/adminhome.html" class="btnhome">HOME</a>
     </div>
     <main class="main_profile">
 
