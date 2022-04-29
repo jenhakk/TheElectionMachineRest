@@ -32,7 +32,7 @@
 			<div class="rowcan1">
 				<div class="col">
 					<img class="profile_cand" name="pic"
-						src="${requestScope.candper.pic}">
+						src="/pics/${requestScope.candper.pic}">
 
 
 

@@ -44,7 +44,7 @@
 						<div class="col-4">
 
 							<div class="image">
-								<img class="profile" src="<c:out value="${cand.pic}"/>">
+								<img class="profile" src="<c:out value="/pics/${cand.pic}"/>">
 							</div>
 							<p class="candnum">
 								<c:out value="${cand.id}" />

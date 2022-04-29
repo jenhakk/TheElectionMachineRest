@@ -32,7 +32,7 @@
                 <div class="col">
                 
           	
-                    <image><img class="profile_cand" src="${requestScope.candform.pic}"></image>
+                    <image><img class="profile_cand" src="/pics/${requestScope.candform.pic}"></image>
                         <p class="candnumber">${requestScope.candform.candi_id}</p>
                         <h2 class="candnameprof">${requestScope.candform.firstname} ${requestScope.candform.lastname}</h2>
                 </div>

@@ -51,7 +51,7 @@
             <div class="rowcan1">
                 <div class="col">
                 
-          	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
+          	<form action="/rest/questions/addcandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
                     <image><img class="profile_cand" id="profilepic" src=""></image>
                     
                        
@@ -66,7 +66,7 @@
                 <div class="form-group">
                
                <label for="id" id="label">Picture</label><br>
-                <input type="file" id="input-file" class="infoper" name="file" accept=".png" onchange="changeImage(event)"/>
+               <input type="file" id="input-file" class="infoper" name="file" accept=".png" onchange="changeImage(event)"/>
     
      			</div>
 			 
