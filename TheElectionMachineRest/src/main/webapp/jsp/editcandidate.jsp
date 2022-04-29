@@ -54,7 +54,7 @@
                 <div class="col">
                 
           	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
-                    <image><img class="profile_cand" id="profilepic" src="${requestScope.candform.pic}"></image>
+                    <image><img class="profile_cand" id="profilepic" src="/pics/${requestScope.candform.pic}"></image>
                     
                         <p class="candnumber">${requestScope.candform.candidate_id}</p>
                         <h2 class="candnameprof">${requestScope.candform.fname} ${requestScope.candform.lname}</h2>

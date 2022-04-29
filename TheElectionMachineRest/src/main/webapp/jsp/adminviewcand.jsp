@@ -25,7 +25,7 @@
 
             <div class="rowcan1">
                 <div class="col">
-                <div class="image"><img class="profile_cand" src="${requestScope.candidate.pic}"></div>
+                <div class="image"><img class="profile_cand" src="/pics/${requestScope.candidate.pic}"></div>
                     <p class="candnumber">${requestScope.candidate.candidate_id}</p>
                     <h2 class="candname">${requestScope.candidate.fname}
 						${requestScope.candidate.lname}</h2>
