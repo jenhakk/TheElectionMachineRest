@@ -337,7 +337,7 @@ public class Rest {
 		Candidates c = new Candidates(lname, fname, picture, party, munic, age, promo, prof);
 		System.out.println("happens");
 		c = Daojpa.addCandidate(c);
-
+		Daojpa.addAnswersToNewCandidate();
 		
 		  request.setAttribute("candidate", c);
 		  RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
