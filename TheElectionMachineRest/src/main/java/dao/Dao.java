@@ -194,6 +194,7 @@ public class Dao {
 				a.setCandi_id(RS.getInt("candidate_id"));
 				a.setQuess_id(RS.getInt("question_id"));
 				a.setAnswer(RS.getInt("answer"));
+				a.setComment(RS.getString("comment"));
 				a.setFirstname(RS.getString("firstname"));
 				a.setLastname(RS.getString("lastname"));
 				a.setQuestion(RS.getString("question"));
@@ -224,6 +225,7 @@ public class Dao {
 			while (RS.next()) {
 				a = new Answers();
 				a.setAnswer(RS.getInt("answer"));
+				a.setComment(RS.getString("comment"));
 
 				list.add(a);
 			}
@@ -257,6 +259,7 @@ public class Dao {
 				a.setFirstname(RS.getString("firstname"));
 				a.setLastname(RS.getString("lastname"));
 				a.setQuestion(RS.getString("question"));
+				a.setComment(RS.getString("comment"));
 				list.add(a);
 			}
 			return list;
@@ -346,11 +349,12 @@ public class Dao {
 		try {
 
 			System.out.println("try");
-			String sql = "update answers set answer=? where candidate_id=? and question_id=?";
+			String sql = "update answers set answer=?, comment=? where candidate_id=? and question_id=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, a.getAnswer());
-			pstmt.setInt(3, a.getQuess_id());
-			pstmt.setInt(2, a.getCandi_id());
+			pstmt.setString(2,a.getComment());
+			pstmt.setInt(4, a.getQuess_id());
+			pstmt.setInt(3, a.getCandi_id());
 
 			int rowsUpdated = pstmt.executeUpdate();
 
@@ -398,7 +402,7 @@ public class Dao {
 	public boolean deleteAnswers(String cid) {
 		try {
 			//String sql = "delete from answers where candidate_id = ?";
-			String sql = "update answers set answer=0 where candidate_id = ?";
+			String sql = "update answers set answer=0, comment='' where candidate_id = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, cid);
 			statement.executeUpdate();

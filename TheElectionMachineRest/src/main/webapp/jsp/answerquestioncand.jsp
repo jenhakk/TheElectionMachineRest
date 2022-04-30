@@ -97,8 +97,8 @@
 				
 				<p class="question"><%=i%>. <%=answers.get(i-1).getQuestion()%></p>
 
-
-				<div class="card" id="ques-card">
+				 <div class="questioncard">
+					<div class="card" id="ques-card">
 				
 					<div>
 						<input type="radio" id="strdis"
@@ -127,7 +127,15 @@
 							<label for="stragr">Strongly agree</label>
 					</div>
 
+					</div>
+					 <div class="comment">
+					
+				        <textarea type="text" id="comment" name="comment<%=(answers.get(i-1).getQuess_id())%>" placeholder="Add comment on your answer..." style="margin-top:15px;"></textarea>
+				    
+				    </div>
+				
 				</div>
+				
 				<br>
 
 				<% } 
