@@ -242,22 +242,19 @@ public class SaveValueButtonsUser extends HttpServlet {
 	private LinkedHashMap SortCandidatesByPoints(LinkedHashMap<Integer, Integer> candpoints,
 			ArrayList<Integer> userlist) {
 
-		// candidate number
-		int candidate = 1;
+		
 		if (dao.getConnection()) {
 			ArrayList<Candidate> list = dao.readAllCand();
 		// loop through the number of candidates, at this point we got seven candidates
 		for (int j = 0; j < list.size(); j++) {
-
+			int candidate_id = list.get(j).getId();
 			// Initialize new variable where save similar answers of candidate and end-user, method "compareAnswers" is called, it gets
 			// userlist and candidates id-numbers as a parameter
-			int points = compareAnswers(userlist, candidate);
+			int points = compareAnswers(userlist, candidate_id);
 
 			// Add candidate and its points to a candpoints list
-			candpoints.put(candidate, points);
+			candpoints.put(candidate_id, points);
 
-			// next candidate
-			candidate++;
 		}
 		}
 		// print candidates and them points
