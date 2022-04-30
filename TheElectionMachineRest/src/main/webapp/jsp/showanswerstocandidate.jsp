@@ -73,6 +73,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Question</th>
                     <th scope="col">Your answer</th>
+                    <th scope="col">Comment</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,6 +88,7 @@
                     <c:when test="${ques.answer==5 }">Strongly agree</c:when>
                     <c:otherwise>No opinion yet</c:otherwise>
                     </c:choose></td>
+                    <th><c:out value="${ques.comment}" /></th>
                 </tr>
 			</c:forEach>
             </tbody>

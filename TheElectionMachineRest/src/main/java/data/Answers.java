@@ -16,6 +16,21 @@ public class Answers {
 	private String age;
 	private String profession;
 	private String municipality;
+	private String comment;
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	private ArrayList<Answers> answers;
 	
 	
@@ -64,6 +79,13 @@ public class Answers {
 	public Answers() {
 		// TODO Auto-generated constructor stub
 	}
+	public Answers(int candi_id, int quess_id, int answer, String comment) {
+		this.candi_id = candi_id;
+		this.quess_id = quess_id;
+		this.answer = answer;
+		this.comment = comment;
+	}
+
 	public String getPromo() {
 		return promo;
 	}
