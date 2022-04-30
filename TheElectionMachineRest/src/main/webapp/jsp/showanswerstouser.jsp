@@ -43,9 +43,9 @@
             
             <tbody>
             <!-- Go through candidates answers by using foreach -->
-            <c:forEach var="ques" items="${requestScope.answers}">
+            <c:forEach var="ques" items="${requestScope.answers}" varStatus="loop">
                 <tr>
-                    <th scope="row"><c:out value="${ques.quess_id}" /></th>
+                    <th scope="row"><c:out value="${loop.index+1}" /></th>
                     <td><c:out value="${ques.question}" /></td>
                     <!-- Here we get values of candidates answers from database and change them to text outputs -->                    
                 	<td><c:choose><c:when test="${ques.answer==1}">Strongly disagree</c:when> 
