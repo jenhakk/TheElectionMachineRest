@@ -69,6 +69,7 @@
 
 		<h2 class="answer">Answer questions and submit</h2>
 
+		<form action="/SaveValueButtons" method="POST" class="forminfo">
 			<% 
 			ArrayList<Answers> answers = (ArrayList<Answers>)request.getAttribute("answers");
 			Answers c = (Answers)request.getAttribute("ans");
@@ -81,7 +82,7 @@
 			
 
 		<!-- Question element starts -->
-		<form action="/SaveValueButtons" method="POST" class="forminfo">
+		
 		
 			<div>
 				<input type="hidden" name="candidate" value="${candi.id}">
@@ -92,7 +93,7 @@
 				
 				<p class="question"><%=i%>. <%=answers.get(i-1).getQuestion()%></p>
 
-
+				<div class="questioncard">
 				<div class="card" id="ques-card">
 				
 					<div>
@@ -122,6 +123,13 @@
 							<label for="stragr">Strongly agree</label>
 					</div>
 
+				</div>
+					<div class="comment">
+					
+				      <textarea type="text" id="comment" name="comment<%=(answers.get(i-1).getQuess_id())%>" placeholder="Add comment on your answer..." style="margin-top:15px;"><%=answers.get(i-1).getComment()%></textarea>
+				    
+				    </div>
+				
 				</div>
 				<br>
 
