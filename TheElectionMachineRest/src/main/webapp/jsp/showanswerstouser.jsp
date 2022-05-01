@@ -25,11 +25,11 @@
 	<div class="col"><button type="button" class="btn btn-primary" name="back" onclick="history.back()" style="position: absolute; left: 180px;">BACK</button></div>
 	</div>
 		
-        <h2 class="h2show"> </h2>
+        <h2 class="h2show">Candidate ${answers.get(0).getFirstname()} ${answers.get(0).getLastname()}s answers: </h2>
       
         <!-- Here we get name of the candidate from servlets "ShowAnswersToUser" ArrayList "list", scope the
              details needed -->
-        <div class="container-fluid" id="showcon">Candidates ${answers.get(0).getFirstname()} ${answers.get(0).getLastname()}s answers:</div>
+        <div class="container-fluid" id="showcon"></div>
  		
 	
         <table class="table table-bordered" id="tableshow">
@@ -38,6 +38,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Question</th>
                     <th scope="col">Candidates answer</th>
+                    <th scope="col">Comment</th>
                 </tr>
             </thead>
             
@@ -55,6 +56,7 @@
                     <c:when test="${ques.answer==5 }">Strongly agree</c:when>
                     <c:otherwise>No opinion yet</c:otherwise>
                     </c:choose></td>
+                    <th><c:out value="${ques.comment}"/></th>
                 </tr>
           	</c:forEach>
             </tbody>          

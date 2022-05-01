@@ -27,6 +27,8 @@ public class Answers implements Serializable {
 	private int question_id;
     @Column(name = "answer")
 	private int answer;
+    @Column(name = "comment")
+    private String comment;
 	
 //	Let's keep these here for a bit. I think they're unnecessary but if anything goes wrong and these may be related, I'll get them easily back for testing. -Ama	
 //	@ManyToOne(fetch = FetchType.LAZY)
@@ -37,10 +39,31 @@ public class Answers implements Serializable {
 		
 	}
 	
+	public Answers(int candidate_id, int question_id, int answer, String comment) {
+		this.candidate_id=candidate_id;
+		this.question_id=question_id;
+		this.answer=answer;
+		this.comment = comment;
+	}
+
 	public Answers(int candidate_id, int question_id, int answer) {
 		this.candidate_id=candidate_id;
 		this.question_id=question_id;
 		this.answer=answer;
+	}
+
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public int getId() {
