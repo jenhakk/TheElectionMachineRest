@@ -20,7 +20,7 @@
 </head>
 <body id="candidate">
 	
-	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a></div>
+	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome" style="margin-top:0px;">HOME</a></div>
 	<main class="main_candidate">
 	
 	
@@ -32,7 +32,7 @@
 			<div class="rowcan1">
 				<div class="col">
 					<img class="profile_cand" name="pic"
-						src="${requestScope.candper.pic}">
+						src="/pics/${requestScope.candper.pic}">
 
 
 

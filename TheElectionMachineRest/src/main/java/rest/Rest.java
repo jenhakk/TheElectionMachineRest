@@ -217,16 +217,9 @@ public class Rest {
 			@Context HttpServletResponse response) {
 
 		Candidates candid = Daojpa.readCandidate(cand_id);
-		System.out.println("seuraavaksi file");
 	
 		File f = new File("./pics"); // ../pics jsp:lle
-		String[] piclist =  f.list();
-
-		for (int i = 0; i < piclist.length; i++) {
-
-			piclist[i] = "/pics/" + piclist[i];
-			System.out.println((piclist[i]));
-		}
+		String[] piclist = f.list();
 
 		request.setAttribute("pics", piclist);
 		request.setAttribute("candform", candid);
@@ -250,19 +243,46 @@ public class Rest {
 	public void uploadFile(@FormDataParam("file") InputStream fileInputStream,
 			// public String uploadFile( @FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileMetaData, @FormDataParam("id") int candid,
-			@FormDataParam("pictures") String picture, @FormDataParam("fname") String fname, @FormDataParam("lname") String lname,
+			@FormDataParam("pictures") String picture, @FormDataParam("fname") String fname,
+			@FormDataParam("lname") String lname, @FormDataParam("party") String party,
+			@FormDataParam("munic") String munic, @FormDataParam("age") String age, @FormDataParam("prof") String prof,
+			@FormDataParam("promo") String promo, @Context HttpServletRequest request,
+			@Context HttpServletResponse response, @Context ServletContext sc) throws Exception {
+
+		Candidates cand = new Candidates(candid, lname, fname, picture, party, munic, age, promo, prof);
+		cand = Daojpa.updateCandidate(cand);
+		
+		request.setAttribute("candidate", cand);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@POST
+	@Path("/addcandidate")
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	public void addCandidate(@FormDataParam("file") InputStream fileInputStream,
+			// public String uploadFile( @FormDataParam("file") InputStream fileInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileMetaData,
+			@FormDataParam("fname") String fname, @FormDataParam("lname") String lname,
 			@FormDataParam("party") String party, @FormDataParam("munic") String munic,
 			@FormDataParam("age") String age, @FormDataParam("prof") String prof, @FormDataParam("promo") String promo,
 			@Context HttpServletRequest request, @Context HttpServletResponse response, @Context ServletContext sc)
 			throws Exception {
-
+		System.out.println("Coming here? addCandidate");
 		String UPLOAD_PATH = sc.getRealPath("/pics");
-
+		System.out.println("addcandidate " + UPLOAD_PATH);
 		try {
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
 			OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
+			
 			// OutputStream out = new FileOutputStream(new
 			// File(""+fileMetaData.getFileName()));
 			while ((read = fileInputStream.read(bytes)) != -1) {
@@ -275,24 +295,26 @@ public class Rest {
 		} catch (IOException e) {
 			throw new WebApplicationException("Error while uploading file. Please try again !!");
 		}
-		// String img= "<img src='/"+fileMetaData.getFileName()+"'>";
-		//String pic = "/pics/" + fileMetaData.getFileName();
+		
+		
+		String picture = fileMetaData.getFileName();
 		System.out.println("updatecandidate" + picture);
-		// return pic;
-		// return Response.ok("Data ok" + UPLOAD_PATH).build();
+		//return pic;
+		//return Response.ok("Data ok" + UPLOAD_PATH).build();
 
-//		Candidates cand = new Candidates(candid, lname, fname, pic, party, munic, age, promo, prof);
-//		cand = Daojpa.updateCandidate(cand);
-//		
-//		request.setAttribute("candidate", cand);
-//		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
-//
-//		try {
-//			rd.forward(request, response);
-//		} catch (ServletException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		Candidates c = new Candidates(lname, fname, picture, party, munic, age, promo, prof);
+		System.out.println("happens");
+		c = Daojpa.addCandidate(c);
+		Daojpa.addAnswersToNewCandidate();
+		
+		  request.setAttribute("candidate", c);
+		  RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+		  try {
+		  rd.forward(request, response);
+		  } catch (ServletException | IOException e) {
+		  // TODO Auto-generated
+		   e.printStackTrace(); }
+		 
 	}
 
 	// Removes a candidate and answers related to given question id. Lastly

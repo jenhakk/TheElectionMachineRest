@@ -73,12 +73,13 @@
                     <th scope="col">#</th>
                     <th scope="col">Question</th>
                     <th scope="col">Your answer</th>
+                    <th scope="col">Comment</th>
                 </tr>
             </thead>
             <tbody>
-            <c:forEach var="ques" items="${requestScope.answers}">
+            <c:forEach var="ques" items="${requestScope.answers}" varStatus="loop">
                 <tr>
-                    <th scope="row"><c:out value="${ques.quess_id}" /></th>
+                    <th scope="row"><c:out value="${loop.index+1}" /></th>
                     <td><c:out value="${ques.question}" /></td>
                     <td><c:choose><c:when test="${ques.answer==1}">Strongly disagree</c:when> 
                     <c:when test="${ques.answer==2 }">Disagree</c:when>
@@ -87,6 +88,7 @@
                     <c:when test="${ques.answer==5 }">Strongly agree</c:when>
                     <c:otherwise>No opinion yet</c:otherwise>
                     </c:choose></td>
+                    <th><c:out value="${ques.comment}" /></th>
                 </tr>
 			</c:forEach>
             </tbody>

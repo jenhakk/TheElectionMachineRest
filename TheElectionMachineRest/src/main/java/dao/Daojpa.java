@@ -104,7 +104,7 @@ public class Daojpa {
 
 	}
 
-	//Method to update candidates info (no id or pic)
+	//Method to update candidates info
 	public static Candidates updateCandidate(Candidates cand) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		  EntityManager em = emf.createEntityManager(); em.getTransaction().begin();
@@ -132,7 +132,8 @@ public class Daojpa {
 		System.out.println(en.getQuestion_id()+" "+en.getQuestion());
 		int question_id = en.getQuestion_id();
 		
-		for (int candidate_id=1; candidate_id<=candidates.size(); candidate_id++) {
+		for (int i=1; i<=candidates.size(); i++) {
+			int candidate_id = candidates.get(i-1).getCandidate_id();
 			System.out.println("moi");
 			Answers answer=new Answers(candidate_id, question_id, 0);
 			System.out.println(answer);
@@ -162,6 +163,54 @@ public class Daojpa {
 		em.close();
 		
 		return true;
+	}
+
+
+	public static Candidates addCandidate(Candidates c) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(c);
+		em.getTransaction().commit();
+		  
+		  if (c != null) {
+		  
+		  em.merge(c); 
+		  
+		  } else {
+			  System.out.println("eip");
+		  }
+	  
+		List<Candidates> list=getCandidates();
+		Candidates en =(Candidates) list.get(list.size()-1);
+		System.out.println(en.getCandidate_id());
+		int candidate_id = en.getCandidate_id();
+		  
+		Candidates can = readCandidate(candidate_id); 
+		return can;
+	}
+
+
+	public static void addAnswersToNewCandidate() {
+		List<Candidates> list=getCandidates();
+		List<Questions> questions=getQuestions();
+		
+		Candidates en =(Candidates) list.get(list.size()-1);
+		
+		int candidate_id = en.getCandidate_id();
+		
+		for (int question_id=1; question_id<=questions.size(); question_id++) {
+			System.out.println("moi");
+			Answers answer=new Answers(candidate_id, question_id, 0);
+			System.out.println(answer);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(answer);
+			em.getTransaction().commit();
+			em.close();
+		}
+		
 	}
 	
 	//**************************************************************************************

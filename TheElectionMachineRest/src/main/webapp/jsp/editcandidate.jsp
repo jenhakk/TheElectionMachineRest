@@ -25,24 +25,8 @@
 
 <body id="profile">
 
-<script type="text/javascript">
-    
-    //document.getElementById("file-type").onchange = function() {changeImage()};
-    
-    //function changeImage() {
-    	
-    var changeImage = function(event) {	
-    	//document.getElementById("profilepic").src = document.getElementById("input-file").value;
-    	var image = document.getElementById("profilepic");
-    	image.src = URL.createObjectURL(event.target.files[0]);
-    	
-    	
-    	document.getElementById("testi").innerHTML = document.getElementById("input-file").value;
-    };
-
-    </script>
-
-	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a></div>
+	<div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/adminhome.html" class="btnhome">HOME</a></div>
+	
     <main class="main_profile">
     
 
@@ -54,7 +38,7 @@
                 <div class="col">
                 
           	<form action="/rest/questions/updatecandidate" method="POST" class="forminfo" enctype="multipart/form-data">	
-                    <image><img class="profile_cand" id="profilepic" src="${requestScope.candform.pic}"></image>
+                    <image><img class="profile_cand" id="profilepic" src="/pics/${requestScope.candform.pic}"></image>
                     
                         <p class="candnumber">${requestScope.candform.candidate_id}</p>
                         <h2 class="candnameprof">${requestScope.candform.fname} ${requestScope.candform.lname}</h2>
@@ -74,9 +58,9 @@
      			</div> -->
 				<div class="form-group">
 				
-                <label>Choose existing image</label>  
+                <label for="select">Change image</label>  
                 
-                <select name="pictures" onchange="document.getElementById('profilepic').src = this.value;">
+                <select name="pictures" onchange="document.getElementById('profilepic').src = '/pics/' + this.value;">
 			    <c:forEach items="${pics}" var="pics">
 			        <option value="${pics}" onchange="changeImage(event)">${pics}</option>
 			    </c:forEach>
