@@ -19,8 +19,9 @@
 <body id="candidate">
 
     <main class="main_candidate">
+    <div class="adminlogin"><a href="../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
 
-		<div class="col" style="position: absolute; left: 0; margin-top:-30px;"><a href="/adminhome.html" class="btnhome">HOME</a></div>
+		<div class="col" style="position: absolute; left: 0; margin-top:-30px;"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a></div>
         <div class="container">
 
             <div class="rowcan1">
