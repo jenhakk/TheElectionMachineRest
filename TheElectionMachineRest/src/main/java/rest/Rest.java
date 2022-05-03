@@ -124,16 +124,9 @@ public class Rest {
 		}
 	}
 
-	// Removes a question and answers related to given question id. Lastly refreshes
-	// the page by reading questions from the database and sending them to
-	// browsequestions.jsp.
-	// Gets question id from browsequestions.jsp and uses it as a parameter for
-	// daojpa.deleteQuestion().
-	// If question is deleted successfully, is daojpa.getQuestions() called and it's
-	// returned value ('list') is saved to a 'list' (created earlier).
-	// Then the list is forwarded by RequestDispatcher as request back to
-	// browsequestions.jsp
-
+	// Removes a question and answers related to given question id. 
+	// Refreshes the page by reading questions from the database
+	// Gets question_id from browsequestions.jsp and send the refreshed list back to browsequestions.jsp
 	@GET
 	@Path("/deletequestion/{question_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -141,8 +134,10 @@ public class Rest {
 	public void deleteQuestion(@PathParam("question_id") int question_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
+		// Creating a list to receive the list getQuestions() returns 
 		List<Questions> list = new ArrayList<Questions>();
 
+		// Let's call deleteQuestions() and give question_id to it as a parameter. If it succeeds (returns true), let's call qetQuestions().
 		if (Daojpa.deleteQuestion(question_id) == true) {
 			list = Daojpa.getQuestions();
 
@@ -150,6 +145,7 @@ public class Rest {
 			System.out.println("Failed to delete the question.");
 		}
 
+		// Let's send the received list back to browsequestions.jsp by request via RequestDispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		request.setAttribute("questions", list);
 
@@ -317,15 +313,9 @@ public class Rest {
 		 
 	}
 
-	// Removes a candidate and answers related to given question id. Lastly
-	// refreshes the page by reading questions from the database and sending them to
-	// adminbrowse.jsp.
-	// Gets candidate id from browsecandidates.jsp and uses it as parameter for
-	// daojpa.deleteCandidate().
-	// If a candidate is deleted successfully, is daojpa.getCandidates() called and
-	// it's returned value ('list') is saved to a 'list' (created earlier).
-	// Then the list is forwarded by RequestDispatcher as request back to
-	// adminbrowse.jsp
+	// Removes a candidate and answers related to given candidate_id.
+	// Refreshes the page by reading candidates from the database
+	// Gets candidate_id from browsecandidates.jsp and send the refreshed list back to browsequestions.jsp
 	@GET
 	@Path("/deletecandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -333,8 +323,10 @@ public class Rest {
 	public void deleteCandidate(@PathParam("candidate_id") int candidate_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
+		// Creating a list to receive the list getQuestions() returns 
 		List<Candidates> list = new ArrayList<Candidates>();
 
+		// Let's call deleteCandidates() and give candidate_id to it as a parameter. If it succeeds (returns true), let's call qetCandidates().
 		if (Daojpa.deleteCandidate(candidate_id) == true) {
 			list = Daojpa.getCandidates();
 
@@ -342,6 +334,7 @@ public class Rest {
 			System.out.println("Failed to delete the candidate.");
 		}
 
+		// Let's send the received list back to adminbrowse.jsp by request via RequestDispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminbrowse.jsp");
 		request.setAttribute("candidates", list);
 
