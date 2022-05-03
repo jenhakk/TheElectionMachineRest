@@ -19,7 +19,8 @@
 <body id="showans">
     
     <main class="main_show">
-        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/adminhome.html" class="btnhome">HOME</a></div>
+    <div class="adminlogin"><a href="../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
+        <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a></div>
 
         
         <h2 class="h2show">Questions</h2>
