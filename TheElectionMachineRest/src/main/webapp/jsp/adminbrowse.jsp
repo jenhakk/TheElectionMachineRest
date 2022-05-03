@@ -23,7 +23,7 @@
 <body id="browse">
 
 	<main class="main_browse">
-	<div class="adminlogin"><a href="../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
+	<div class="adminlogin"><a href="/../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
 	
 	<div class="col"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a></div>
 		<h1>Candidates</h1>

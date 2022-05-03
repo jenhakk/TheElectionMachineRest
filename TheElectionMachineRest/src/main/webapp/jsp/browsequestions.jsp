@@ -19,7 +19,7 @@
 <body id="showans">
     
     <main class="main_show">
-    <div class="adminlogin"><a href="../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
+    <div class="adminlogin"><a href="/../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
         <div class="col" style="position: absolute; left: 0px; width: 50px;"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a></div>
 
         
@@ -35,10 +35,10 @@
                    
                 </tr>
             </thead>
-            <c:forEach var="ques" items="${requestScope.questions}">
+            <c:forEach var="ques" items="${requestScope.questions}" varStatus="loop">
             <tbody>
                 <tr>
-                    <th scope="row"><c:out value="${ques.question_id}" /></th>
+                    <th scope="row"><c:out value="${loop.index+1}" /></th>
                     <td>
                     
                         <div class="row">
