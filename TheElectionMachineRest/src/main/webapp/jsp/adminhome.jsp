@@ -20,7 +20,7 @@
     <div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a></div>
     
     <main class="admin_home">
-    <div class="adminlogin"><a href="../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
+    <div class="adminlogin"><a href="/../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
 
         <div class="container-fluid">
             <h1>Admin homepage </h1>

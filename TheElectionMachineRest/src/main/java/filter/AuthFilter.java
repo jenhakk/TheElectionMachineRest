@@ -1,6 +1,9 @@
 package filter;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.servlet.DispatcherType;
@@ -18,6 +21,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 
+import dao.Daojpa;
+import datarest.Admin;
+
 /**
  * Servlet Filter implementation class AuthFilter
  */
@@ -33,8 +39,6 @@ public class AuthFilter implements Filter {
 	public void destroy() {
 	}
 
-	
-	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -72,68 +76,90 @@ public class AuthFilter implements Filter {
 	protected boolean allowUser(String auth, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
+		System.out.println("allowuser");
+
 		String user = request.getParameter("username");
 		String pass = request.getParameter("passwd");
-		System.out.println(user + pass);
+
+		System.out.println("lomakkeelta" + user + pass);
 
 		if (auth == null) {
-			System.out.println("auth == null");
 
-			String uname = "admin";
-			String passwd = "password";
+			if (user == null && pass == null) {
 
-			if (uname.equals(user) && pass.equals(passwd)) {
-
-				System.out.println("Tunnukset ok");
-
-				
-				return true;
-
+				response.sendRedirect("/adminlogin.html");
 			} else {
 
-				System.out.println("userauth on false");
-				return false;
+				user = request.getParameter("username");
+				pass = request.getParameter("passwd");
+				
+				System.out.println("ifissä" + user + pass);
+
+				boolean match = compareCredentials(user, pass);
+				System.out.println("auth == null");
+
+				return match;
 			}
+
 		} else if (auth != null) {
-			
+
 			return true;
-			
+
 		}
-		
+
 		return false;
 	}
 
-	@POST
-	@Consumes("application/x-www-form-urlencoded")
-	public void checkUser(@FormParam("username") String username, @FormParam("passwd") String passwd,
-			HttpServletResponse response) {
-		System.out.println("ollaanko checkuser");
-		boolean userauth = false;
-		String uname = "admin";
-		String pass = "password";
+	public static String crypt(String str) {
+		if (str == null || str.length() == 0) {
+			throw new IllegalArgumentException("String to encript cannot be null or zero length");
+		}
 
-		if (uname.equals(username) && pass.equals(passwd)) {
+		MessageDigest digester;
+		try {
+			digester = MessageDigest.getInstance("MD5");
 
-			System.out.println("Tunnukset ok");
-			userauth = true;
-			try {
-				response.sendRedirect("/jsp/adminhome.jsp");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			digester.update(str.getBytes());
+			byte[] hash = digester.digest();
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < hash.length; i++) {
+				if ((0xff & hash[i]) < 0x10) {
+					hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
+				} else {
+					hexString.append(Integer.toHexString(0xFF & hash[i]));
+				}
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public boolean compareCredentials(String user, String pass) {
+
+		Admin admin = new Admin();
+		admin = Daojpa.getCredentials();
+		String uname = admin.getUsername();
+		String encrypted = admin.getPassword();
+		String encryptedps = crypt(pass);
+
+		System.out.println("username " + uname + " encrypted " + encrypted);
+
+		if (user.equals(uname)) {
+
+			if (encryptedps.equals(encrypted)) {
+
+				System.out.println("Tunnukset ok");
+				return true;
 			}
 
 		} else {
-			userauth = false;
+
 			System.out.println("userauth on false");
-			try {
-				response.sendRedirect("/adminlogin.html");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			return false;
 		}
+		return false;
 
 	}
-
 }
