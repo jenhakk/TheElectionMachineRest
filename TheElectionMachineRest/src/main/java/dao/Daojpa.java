@@ -1,17 +1,20 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import datarest.Admin;
 import datarest.Answers;
 import datarest.Candidates;
 import datarest.Questions;
 
 public class Daojpa {
-
+	
+	// Method reads all of the questions from database to a list.
 	public static List<Questions> getQuestions() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -50,7 +53,7 @@ public class Daojpa {
 	  
 	  }
 	 
-
+	// Method adds new question to a database and then returns all questions.
 	public static List<Questions> addQuestion(Questions q) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -124,7 +127,7 @@ public class Daojpa {
 		  return can;
 	}
 
-
+	// Method adds all candidates answer to a zero in the newly added question.
 	public static void addAnswerZeroToNewQuestion() {
 		List<Candidates> candidates=getCandidates();
 		List<Questions> list=getQuestions();
@@ -167,7 +170,7 @@ public class Daojpa {
 		return true;
 	}
 
-
+	//Method adds new candidates info to a database and then returns readCandidate
 	public static Candidates addCandidate(Candidates c) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -192,7 +195,7 @@ public class Daojpa {
 		return can;
 	}
 
-
+	//Method adds newly added candidates answer values to questions zero.
 	public static void addAnswersToNewCandidate() {
 		List<Candidates> list=getCandidates();
 		List<Questions> questions=getQuestions();
@@ -213,6 +216,20 @@ public class Daojpa {
 			em.close();
 		}
 		
+	}
+
+
+	public static Admin getCredentials() {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Admin admin = new Admin();
+		
+		admin = em.find(Admin.class, 1);
+		em.close();	
+		
+		return admin;
 	}
 	
 	//**************************************************************************************

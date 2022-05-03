@@ -38,6 +38,9 @@ import datarest.Questions;
 @Path("/questions")
 public class Rest {
 
+	// Method for getting all of the questions into a list by Daojpa method
+	// "getQuestions".
+	// Method sends list of questions to browsequestions.jsp.
 	@GET
 	@Path("/getquestions")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -103,6 +106,14 @@ public class Rest {
 	}
 
 	// ***************************************************************************************
+
+	// Method adds a question to a database. First creating new question object and
+	// add the question
+	// inside it and send it to Daojpas method addQuestion. After that method calls
+	// Daojpas method which add all
+	// candidates answer to zero for the new question. Dao returns the question to a
+	// list and
+	// method sends the list to browsequestions.jpa.
 
 	@POST
 	@Path("/addquestion")
@@ -213,7 +224,7 @@ public class Rest {
 			@Context HttpServletResponse response) {
 
 		Candidates candid = Daojpa.readCandidate(cand_id);
-	
+
 		File f = new File("./pics"); // ../pics jsp:lle
 		String[] piclist = f.list();
 
@@ -247,7 +258,7 @@ public class Rest {
 
 		Candidates cand = new Candidates(candid, lname, fname, picture, party, munic, age, promo, prof);
 		cand = Daojpa.updateCandidate(cand);
-		
+
 		request.setAttribute("candidate", cand);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
 
@@ -259,17 +270,23 @@ public class Rest {
 		}
 	}
 
+	// Gets new candidates info using FormDataParams from addcandidate.jsp and saves
+	// the info
+	// to object Candidate. Then sends object to a daoJpa and saves candidates info
+	// to a database.
+	// After that method calls daojpas method "addAnswersToNewCandidate,
+	// finally in the end sends the object by setAttribute to a adminviewcand.jsp.
+
 	@POST
 	@Path("/addcandidate")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 	public void addCandidate(@FormDataParam("file") InputStream fileInputStream,
 			// public String uploadFile( @FormDataParam("file") InputStream fileInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileMetaData,
-			@FormDataParam("fname") String fname, @FormDataParam("lname") String lname,
-			@FormDataParam("party") String party, @FormDataParam("munic") String munic,
-			@FormDataParam("age") String age, @FormDataParam("prof") String prof, @FormDataParam("promo") String promo,
-			@Context HttpServletRequest request, @Context HttpServletResponse response, @Context ServletContext sc)
-			throws Exception {
+			@FormDataParam("file") FormDataContentDisposition fileMetaData, @FormDataParam("fname") String fname,
+			@FormDataParam("lname") String lname, @FormDataParam("party") String party,
+			@FormDataParam("munic") String munic, @FormDataParam("age") String age, @FormDataParam("prof") String prof,
+			@FormDataParam("promo") String promo, @Context HttpServletRequest request,
+			@Context HttpServletResponse response, @Context ServletContext sc) throws Exception {
 		System.out.println("Coming here? addCandidate");
 		String UPLOAD_PATH = sc.getRealPath("/pics");
 		System.out.println("addcandidate " + UPLOAD_PATH);
@@ -278,7 +295,7 @@ public class Rest {
 			byte[] bytes = new byte[1024];
 
 			OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
-			
+
 			// OutputStream out = new FileOutputStream(new
 			// File(""+fileMetaData.getFileName()));
 			while ((read = fileInputStream.read(bytes)) != -1) {
@@ -291,26 +308,26 @@ public class Rest {
 		} catch (IOException e) {
 			throw new WebApplicationException("Error while uploading file. Please try again !!");
 		}
-		
-		
+
 		String picture = fileMetaData.getFileName();
 		System.out.println("updatecandidate" + picture);
-		//return pic;
-		//return Response.ok("Data ok" + UPLOAD_PATH).build();
+		// return pic;
+		// return Response.ok("Data ok" + UPLOAD_PATH).build();
 
 		Candidates c = new Candidates(lname, fname, picture, party, munic, age, promo, prof);
 		System.out.println("happens");
 		c = Daojpa.addCandidate(c);
 		Daojpa.addAnswersToNewCandidate();
-		
-		  request.setAttribute("candidate", c);
-		  RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
-		  try {
-		  rd.forward(request, response);
-		  } catch (ServletException | IOException e) {
-		  // TODO Auto-generated
-		   e.printStackTrace(); }
-		 
+
+		request.setAttribute("candidate", c);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated
+			e.printStackTrace();
+		}
+
 	}
 
 	// Removes a candidate and answers related to given candidate_id.
@@ -346,4 +363,7 @@ public class Rest {
 		}
 	}
 //********************************************************************************************************************
+
+	
+
 }

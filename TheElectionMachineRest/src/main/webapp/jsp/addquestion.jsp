@@ -17,9 +17,10 @@
 
 <body id="profile">
 
-    <div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/index.html" class="btnhome">HOME</a>
+    <div class="col" style="position: absolute; left: 0; margin-top:0px;"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a>
     </div>
     <main class="main_profile">
+    <div class="adminlogin"><a href="/../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
 
 
         <h2>Add new question</h2>

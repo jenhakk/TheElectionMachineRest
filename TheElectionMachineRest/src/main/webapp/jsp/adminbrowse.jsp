@@ -23,8 +23,9 @@
 <body id="browse">
 
 	<main class="main_browse">
+	<div class="adminlogin"><a href="/../Logout"><img src="/pics/icons8-logout-32.png">Log out</a></div>
 	
-	<div class="col"><a href="/adminhome.html" class="btnhome">HOME</a></div>
+	<div class="col"><a href="/jsp/adminhome.jsp" class="btnhome">HOME</a></div>
 		<h1>Candidates</h1>
 		
 		<h2 style="margin-bottom: 50px;">Choose a candidate to edit or delete them</h2>
@@ -51,8 +52,8 @@
 						<div class="col-7">
 							<div class="card-body">
 								<h5 class="card-title">
-									<c:out value="${cand.lname}" />
 									<c:out value="${cand.fname}" />
+									<c:out value="${cand.lname}" />
 								</h5>
 								<p class="card-text">
 									"
