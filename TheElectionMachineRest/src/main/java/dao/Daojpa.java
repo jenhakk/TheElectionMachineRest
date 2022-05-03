@@ -1,11 +1,13 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import datarest.Admin;
 import datarest.Answers;
 import datarest.Candidates;
 import datarest.Questions;
@@ -214,6 +216,20 @@ public class Daojpa {
 			em.close();
 		}
 		
+	}
+
+
+	public static Admin getCredentials() {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Admin admin = new Admin();
+		
+		admin = em.find(Admin.class, 1);
+		em.close();	
+		
+		return admin;
 	}
 	
 	//**************************************************************************************
