@@ -9,7 +9,7 @@
 	</welcome-file-list>
 
 	<servlet>
-
+		
 		<servlet-name>minion</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<!-- init-param tells in which package REST services are ye -->
@@ -31,5 +31,12 @@
 	<servlet-mapping>
 		<servlet-name>minion</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
+		
+		
+		
+		
 	</servlet-mapping>
+	
+	
+	
 </web-app>
