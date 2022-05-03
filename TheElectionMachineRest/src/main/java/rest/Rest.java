@@ -38,6 +38,9 @@ import datarest.Questions;
 @Path("/questions")
 public class Rest {
 
+	// Method for getting all of the questions into a list by Daojpa method
+	// "getQuestions".
+	// Method sends list of questions to browsequestions.jsp.
 	@GET
 	@Path("/getquestions")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -104,6 +107,14 @@ public class Rest {
 
 	// ***************************************************************************************
 
+	// Method adds a question to a database. First creating new question object and
+	// add the question
+	// inside it and send it to Daojpas method addQuestion. After that method calls
+	// Daojpas method which add all
+	// candidates answer to zero for the new question. Dao returns the question to a
+	// list and
+	// method sends the list to browsequestions.jpa.
+
 	@POST
 	@Path("/addquestion")
 	@Produces(MediaType.APPLICATION_XHTML_XML)
@@ -124,16 +135,9 @@ public class Rest {
 		}
 	}
 
-	// Removes a question and answers related to given question id. Lastly refreshes
-	// the page by reading questions from the database and sending them to
-	// browsequestions.jsp.
-	// Gets question id from browsequestions.jsp and uses it as a parameter for
-	// daojpa.deleteQuestion().
-	// If question is deleted successfully, is daojpa.getQuestions() called and it's
-	// returned value ('list') is saved to a 'list' (created earlier).
-	// Then the list is forwarded by RequestDispatcher as request back to
-	// browsequestions.jsp
-
+	// Removes a question and answers related to given question id. 
+	// Refreshes the page by reading questions from the database
+	// Gets question_id from browsequestions.jsp and send the refreshed list back to browsequestions.jsp
 	@GET
 	@Path("/deletequestion/{question_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -141,8 +145,10 @@ public class Rest {
 	public void deleteQuestion(@PathParam("question_id") int question_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
+		// Creating a list to receive the list getQuestions() returns 
 		List<Questions> list = new ArrayList<Questions>();
 
+		// Let's call deleteQuestions() and give question_id to it as a parameter. If it succeeds (returns true), let's call qetQuestions().
 		if (Daojpa.deleteQuestion(question_id) == true) {
 			list = Daojpa.getQuestions();
 
@@ -150,6 +156,7 @@ public class Rest {
 			System.out.println("Failed to delete the question.");
 		}
 
+		// Let's send the received list back to browsequestions.jsp by request via RequestDispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/browsequestions.jsp");
 		request.setAttribute("questions", list);
 
@@ -217,7 +224,7 @@ public class Rest {
 			@Context HttpServletResponse response) {
 
 		Candidates candid = Daojpa.readCandidate(cand_id);
-	
+
 		File f = new File("./pics"); // ../pics jsp:lle
 		String[] piclist = f.list();
 
@@ -251,7 +258,7 @@ public class Rest {
 
 		Candidates cand = new Candidates(candid, lname, fname, picture, party, munic, age, promo, prof);
 		cand = Daojpa.updateCandidate(cand);
-		
+
 		request.setAttribute("candidate", cand);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
 
@@ -263,17 +270,23 @@ public class Rest {
 		}
 	}
 
+	// Gets new candidates info using FormDataParams from addcandidate.jsp and saves
+	// the info
+	// to object Candidate. Then sends object to a daoJpa and saves candidates info
+	// to a database.
+	// After that method calls daojpas method "addAnswersToNewCandidate,
+	// finally in the end sends the object by setAttribute to a adminviewcand.jsp.
+
 	@POST
 	@Path("/addcandidate")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 	public void addCandidate(@FormDataParam("file") InputStream fileInputStream,
 			// public String uploadFile( @FormDataParam("file") InputStream fileInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileMetaData,
-			@FormDataParam("fname") String fname, @FormDataParam("lname") String lname,
-			@FormDataParam("party") String party, @FormDataParam("munic") String munic,
-			@FormDataParam("age") String age, @FormDataParam("prof") String prof, @FormDataParam("promo") String promo,
-			@Context HttpServletRequest request, @Context HttpServletResponse response, @Context ServletContext sc)
-			throws Exception {
+			@FormDataParam("file") FormDataContentDisposition fileMetaData, @FormDataParam("fname") String fname,
+			@FormDataParam("lname") String lname, @FormDataParam("party") String party,
+			@FormDataParam("munic") String munic, @FormDataParam("age") String age, @FormDataParam("prof") String prof,
+			@FormDataParam("promo") String promo, @Context HttpServletRequest request,
+			@Context HttpServletResponse response, @Context ServletContext sc) throws Exception {
 		System.out.println("Coming here? addCandidate");
 		String UPLOAD_PATH = sc.getRealPath("/pics");
 		System.out.println("addcandidate " + UPLOAD_PATH);
@@ -282,7 +295,7 @@ public class Rest {
 			byte[] bytes = new byte[1024];
 
 			OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
-			
+
 			// OutputStream out = new FileOutputStream(new
 			// File(""+fileMetaData.getFileName()));
 			while ((read = fileInputStream.read(bytes)) != -1) {
@@ -295,37 +308,31 @@ public class Rest {
 		} catch (IOException e) {
 			throw new WebApplicationException("Error while uploading file. Please try again !!");
 		}
-		
-		
+
 		String picture = fileMetaData.getFileName();
 		System.out.println("updatecandidate" + picture);
-		//return pic;
-		//return Response.ok("Data ok" + UPLOAD_PATH).build();
+		// return pic;
+		// return Response.ok("Data ok" + UPLOAD_PATH).build();
 
 		Candidates c = new Candidates(lname, fname, picture, party, munic, age, promo, prof);
 		System.out.println("happens");
 		c = Daojpa.addCandidate(c);
 		Daojpa.addAnswersToNewCandidate();
-		
-		  request.setAttribute("candidate", c);
-		  RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
-		  try {
-		  rd.forward(request, response);
-		  } catch (ServletException | IOException e) {
-		  // TODO Auto-generated
-		   e.printStackTrace(); }
-		 
+
+		request.setAttribute("candidate", c);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminviewcand.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated
+			e.printStackTrace();
+		}
+
 	}
 
-	// Removes a candidate and answers related to given question id. Lastly
-	// refreshes the page by reading questions from the database and sending them to
-	// adminbrowse.jsp.
-	// Gets candidate id from browsecandidates.jsp and uses it as parameter for
-	// daojpa.deleteCandidate().
-	// If a candidate is deleted successfully, is daojpa.getCandidates() called and
-	// it's returned value ('list') is saved to a 'list' (created earlier).
-	// Then the list is forwarded by RequestDispatcher as request back to
-	// adminbrowse.jsp
+	// Removes a candidate and answers related to given candidate_id.
+	// Refreshes the page by reading candidates from the database
+	// Gets candidate_id from browsecandidates.jsp and send the refreshed list back to browsequestions.jsp
 	@GET
 	@Path("/deletecandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -333,8 +340,10 @@ public class Rest {
 	public void deleteCandidate(@PathParam("candidate_id") int candidate_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
+		// Creating a list to receive the list getQuestions() returns 
 		List<Candidates> list = new ArrayList<Candidates>();
 
+		// Let's call deleteCandidates() and give candidate_id to it as a parameter. If it succeeds (returns true), let's call qetCandidates().
 		if (Daojpa.deleteCandidate(candidate_id) == true) {
 			list = Daojpa.getCandidates();
 
@@ -342,6 +351,7 @@ public class Rest {
 			System.out.println("Failed to delete the candidate.");
 		}
 
+		// Let's send the received list back to adminbrowse.jsp by request via RequestDispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminbrowse.jsp");
 		request.setAttribute("candidates", list);
 

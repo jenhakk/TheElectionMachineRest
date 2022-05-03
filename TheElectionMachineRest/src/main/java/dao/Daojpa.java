@@ -11,7 +11,8 @@ import datarest.Candidates;
 import datarest.Questions;
 
 public class Daojpa {
-
+	
+	// Method reads all of the questions from database to a list.
 	public static List<Questions> getQuestions() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -50,7 +51,7 @@ public class Daojpa {
 	  
 	  }
 	 
-
+	// Method adds new question to a database and then returns all questions.
 	public static List<Questions> addQuestion(Questions q) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -64,16 +65,17 @@ public class Daojpa {
 	
 	// method deletes a question and answers related to it based on a given question id
 	public static boolean deleteQuestion(int question_id) {
+		// EntityMangaer enables the interaction with database
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Questions question = em.find(Questions.class, question_id);
+		Questions question = em.find(Questions.class, question_id);   // Searches for an entity of the specified class and primary key.
 		
 		if (question != null) {
-			em.remove(question);
+			em.remove(question);   // Removes the entity.
 		}
 
-		em.getTransaction().commit();
+		em.getTransaction().commit();   // Commits the transaction. Entity won't be removed unless commit is success.
 		em.close();
 		
 		return true;
@@ -123,7 +125,7 @@ public class Daojpa {
 		  return can;
 	}
 
-
+	// Method adds all candidates answer to a zero in the newly added question.
 	public static void addAnswerZeroToNewQuestion() {
 		List<Candidates> candidates=getCandidates();
 		List<Questions> list=getQuestions();
@@ -150,22 +152,23 @@ public class Daojpa {
 	
 	// method deletes a candidate and answers related to given candidate id
 	public static boolean deleteCandidate(int candidate_id) {
+		// EntityMangaer enables the interaction with database
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Candidates cand = em.find(Candidates.class, candidate_id);
+		Candidates cand = em.find(Candidates.class, candidate_id);   // Searches for an entity of the specified class and primary key.
 		
 		if (cand != null) {
-			em.remove(cand);
+			em.remove(cand);   // Removes the entity.
 		}
 
-		em.getTransaction().commit();
+		em.getTransaction().commit();   // Commits the transaction. Entity won't be removed unless commit is success.
 		em.close();
 		
 		return true;
 	}
 
-
+	//Method adds new candidates info to a database and then returns readCandidate
 	public static Candidates addCandidate(Candidates c) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
 		EntityManager em = emf.createEntityManager();
@@ -190,7 +193,7 @@ public class Daojpa {
 		return can;
 	}
 
-
+	//Method adds newly added candidates answer values to questions zero.
 	public static void addAnswersToNewCandidate() {
 		List<Candidates> list=getCandidates();
 		List<Questions> questions=getQuestions();
