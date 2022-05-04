@@ -43,7 +43,7 @@
                                 onclick="history.back()">BACK</button>
                         </div>
                         <div class="col-2">
-                            <input type="submit" class="btn btn-primary" name="ok" value="ADD QUESTION">
+                            <input type="submit" class="btn btn-primary" name="ok" value="ADD QUESTION" style="max-width: 200px;">
                         </div>
                         
                     </div>
