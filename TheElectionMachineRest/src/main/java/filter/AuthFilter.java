@@ -26,6 +26,9 @@ import datarest.Admin;
 
 /**
  * Servlet Filter implementation class AuthFilter
+ * Servlet for login sessions and filtering pages
+ * @author jenna, amanda, ansku
+ * Date: May 4-2022
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE,
 		DispatcherType.ERROR }, urlPatterns = { "/jsp/adminhome.jsp", "/jsp/adminbrowse.jsp", "/jsp/adminviewcand.jsp",
@@ -45,43 +48,47 @@ public class AuthFilter implements Filter {
 		doFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
 	}
 
+	/**
+	 * Method for checking if session exists and redirecting to login page if not
+	 * @param request
+	 * @param response
+	 * @param chain
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		/*
-		 * Getting the Authorization string from the request header. It looks like:
-		 * Basic aGtqaGtqaGtqOg== Starting with Basic and the crypted part is crypted
-		 * version of pattern someuser:somepassword
-		 */
+	
 		HttpSession session = request.getSession(true);
 		String auth = (String) session.getAttribute("authUser");
 		System.out.println(auth);
 
 		// Check if the user is allowed?
 		if (!allowUser(auth, request, response)) {
-			// The client (browser) is not allowed, so report the situation to the browser
-			System.out.println("allowuser !");
+			
 			response.sendRedirect("/adminlogin.html");
 		} else {
-			// The client is allowed to forward the request to the URI "/sercretservlet"
-			System.out.println("else");
 			session.setAttribute("authUser", "ok");
 			chain.doFilter(request, response);
-			System.out.println("else 2");
 		}
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
 
+	/**
+	 * Method for checking if session is null or not, gets username and password from login form and calls method compareCredentials() to compare credentials with database
+	 * @param auth
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	protected boolean allowUser(String auth, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
-		System.out.println("allowuser");
-
 		String user = request.getParameter("username");
 		String pass = request.getParameter("passwd");
-
-		System.out.println("lomakkeelta" + user + pass);
 
 		if (auth == null) {
 
@@ -92,11 +99,8 @@ public class AuthFilter implements Filter {
 
 				user = request.getParameter("username");
 				pass = request.getParameter("passwd");
-				
-				System.out.println("ifissä" + user + pass);
 
 				boolean match = compareCredentials(user, pass);
-				System.out.println("auth == null");
 
 				return match;
 			}
@@ -110,6 +114,11 @@ public class AuthFilter implements Filter {
 		return false;
 	}
 
+	/**
+	 * Method for encrypting password from form (taken from course materials)
+	 * @param str String value to encrypt
+	 * @return encrypted password
+	 */
 	public static String crypt(String str) {
 		if (str == null || str.length() == 0) {
 			throw new IllegalArgumentException("String to encript cannot be null or zero length");
@@ -136,6 +145,12 @@ public class AuthFilter implements Filter {
 		return "";
 	}
 
+	/**
+	 * Method for getting username and encrypted password from database (with Daojpa) and comparing them with login credentials
+	 * @param user
+	 * @param pass
+	 * @return boolean value of comparison result
+	 */
 	public boolean compareCredentials(String user, String pass) {
 
 		Admin admin = new Admin();
