@@ -29,12 +29,7 @@ public class Answers implements Serializable {
 	private int answer;
     @Column(name = "comment")
     private String comment;
-	
-//	Let's keep these here for a bit. I think they're unnecessary but if anything goes wrong and these may be related, I'll get them easily back for testing. -Ama	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn(name = "question_id")
-//	private Questions questions;
-	
+		
 	public Answers() {
 		
 	}
