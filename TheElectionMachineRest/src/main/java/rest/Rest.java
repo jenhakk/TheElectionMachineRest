@@ -144,6 +144,8 @@ public class Rest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteQuestion(@PathParam("question_id") int question_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
+		
+		System.out.println("ollaanko restissä?");
 
 		// Creating a list to receive the list getQuestions() returns 
 		List<Questions> list = new ArrayList<Questions>();
