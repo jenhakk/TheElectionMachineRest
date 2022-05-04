@@ -16,6 +16,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script> 
+
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>     
     <title>Show answers</title>
 </head>
 
@@ -99,7 +102,7 @@
             <c:when test="${answers.get(0).getAnswer() == 0}"><div class="col-3"><a href="/AnswerQuestionsCandidate?id=${answers.get(0).getCandi_id()}" class="btn btn-primary">ANSWER<br>QUESTIONS</a></div></c:when>
             
             <c:when test="${answers.get(0).getAnswer() != 0}"><div class="col-3"><a href="/EditQuestionsCand?id=${answers.get(0).getCandi_id()}" style="display:block;" class="btn btn-primary">EDIT</a></div>
-            <div class="col-3"><a href="/DeleteAnswers?id=${answers.get(0).getCandi_id()}&qid=${answers.get(0).getQuess_id()}" class="btn btn-primary">DELETE ANSWERS</a></div></c:when></c:choose>
+            <div class="col-3"><a href="/DeleteAnswers?id=${answers.get(0).getCandi_id()}&qid=${answers.get(0).getQuess_id()}" class="btn btn-primary" onClick="success(event)">DELETE ANSWERS</a></div></c:when></c:choose>
 				
 			        
 			</div>
@@ -107,6 +110,49 @@
 
     </main>
 
+ <script> 
+
+	function success(ev) { 
+	
+	 
+	
+	ev.preventDefault(); 
+	
+	var url = ev.currentTarget.getAttribute('href'); 
+	
+	console.log(ev); 
+	
+	console.log(url); 
+	
+	 Swal.fire({ 
+	
+	        icon: 'warning', 
+	
+	        title: 'Are you sure?', 
+	
+	        text: "You won't be able to revert this!", 
+	
+	        showCancelButton: true, 
+	
+	        confirmButtonColor: '#3085d6', 
+	
+	        cancelButtonColor: '#d33', 
+	
+	        confirmButtonText: 'Yes, do it!' 
+	
+	    }).then((result) => { 
+	
+	        if (result.value) { 
+	
+	            window.location.href=url; 
+	
+	        } 
+	
+	    }) 
+	
+	} 
+
+</script> 
 
 
 

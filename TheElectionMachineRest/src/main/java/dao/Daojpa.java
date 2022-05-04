@@ -204,8 +204,9 @@ public class Daojpa {
 		
 		int candidate_id = en.getCandidate_id();
 		
-		for (int question_id=1; question_id<=questions.size(); question_id++) {
+		for (int i=1; i <=questions.size(); i++){
 			System.out.println("moi");
+			int question_id = questions.get(i-1).getQuestion_id();
 			Answers answer=new Answers(candidate_id, question_id, 0);
 			System.out.println(answer);
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("minion");
