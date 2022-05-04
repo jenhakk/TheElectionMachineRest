@@ -53,8 +53,8 @@
 						<div class="col-7">
 							<div class="card-body">
 								<h5 class="card-title">
-									<c:out value="${cand.name}" />
 									<c:out value="${cand.fname}" />
+									<c:out value="${cand.name}" />
 								</h5>
 								<p class="card-text">
 									"
