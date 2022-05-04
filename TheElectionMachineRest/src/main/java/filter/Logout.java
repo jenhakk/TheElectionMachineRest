@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class Logout
+ * Servlet for invalidating session in logout
+ * Date: May 4-2022
+ * @author jenna hakkarainen, amanda karjalainen, anna-maria palm
+ *
  */
+ 
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +37,7 @@ public class Logout extends HttpServlet {
 	}
 
 	/**
+	 * Method for invalidating session in logout, setting session to null and redirecting back to login page
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

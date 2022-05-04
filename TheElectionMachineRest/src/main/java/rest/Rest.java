@@ -34,13 +34,26 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import dao.Daojpa;
 import datarest.Candidates;
 import datarest.Questions;
-
+/**
+ * Class for REST methods
+ * 
+ *Date: May 4-2022
+ * @author jenna hakkarainen, amanda karjalainen, anna-maria palm
+ *
+ */
 @Path("/questions")
 public class Rest {
 
 	// Method for getting all of the questions into a list by Daojpa method
 	// "getQuestions".
 	// Method sends list of questions to browsequestions.jsp.
+	/**
+	 * Method for getting all of the questions into a list by Daojpa method
+	 * "getQuestions".
+	 * Method sends list of questions to browsequestions.jsp
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/getquestions")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -63,6 +76,14 @@ public class Rest {
 	// questions*******************************
 	// Gets question-to-edit id from browsequestions.jsp, sends it to Daojpa and
 	// gets the question object back. Sends it to editquestion.jsp in to a textfield
+	
+	/**
+	 * Gets question-to-edit id from browsequestions.jsp, sends it to Daojpa and
+	 * gets the question object back. Sends it to editquestion.jsp in to a textfield
+	 * @param ques_id
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/showquestion/{question_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +105,14 @@ public class Rest {
 
 //	//Reads form from editquestion.jsp with POST-method and FormParams, makes a new object from it and sends it to Daojpa for updating the question. 
 //	//Gets back all the questions from database into a list and sends it to browsequestions.jsp 
+	/**
+	 * Reads form from editquestion.jsp with POST-method and FormParams, makes a new object from it and sends it to Daojpa for updating the question.
+	 * Gets back all the questions from database into a list and sends it to browsequestions.jsp 
+	 * @param quesid
+	 * @param question
+	 * @param request
+	 * @param response
+	 */
 	@POST
 	@Path("/updatequestion")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -110,11 +139,18 @@ public class Rest {
 	// Method adds a question to a database. First creating new question object and
 	// add the question
 	// inside it and send it to Daojpas method addQuestion. After that method calls
-	// Daojpas method which add all
-	// candidates answer to zero for the new question. Dao returns the question to a
-	// list and
-	// method sends the list to browsequestions.jpa.
+	// Daojpas method which add all candidates answer to zero for the new question. Dao returns the question to a
+	// list and method sends the list to browsequestions.jpa.
 
+	/**
+	 * Method adds a question to a database. First creating new question object and add the question
+	 * inside it and send it to Daojpas method addQuestion. After that method calls
+	 * Daojpas method which add all candidates answer to zero for the new question. Dao returns the question to a
+	 * list and method sends the list to browsequestions.jpa.
+	 * @param question
+	 * @param request
+	 * @param response
+	 */
 	@POST
 	@Path("/addquestion")
 	@Produces(MediaType.APPLICATION_XHTML_XML)
@@ -122,7 +158,6 @@ public class Rest {
 	public void addQuestion(@FormParam("question") String question, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 		Questions q = new Questions(question);
-		System.out.println("happens");
 		List questions = Daojpa.addQuestion(q);
 		Daojpa.addAnswerZeroToNewQuestion();
 		request.setAttribute("questions", questions);
@@ -135,9 +170,15 @@ public class Rest {
 		}
 	}
 
-	// Removes a question and answers related to given question id. 
-	// Refreshes the page by reading questions from the database
+	// Removes a question and answers related to given question id. Refreshes the page by reading questions from the database
 	// Gets question_id from browsequestions.jsp and send the refreshed list back to browsequestions.jsp
+	/**
+	 * Removes a question and answers related to given question id. Refreshes the page by reading questions from the database
+	 * Gets question_id from browsequestions.jsp and send the refreshed list back to browsequestions.jsp
+	 * @param question_id
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/deletequestion/{question_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -145,8 +186,6 @@ public class Rest {
 	public void deleteQuestion(@PathParam("question_id") int question_id, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 		
-		System.out.println("ollaanko restissä?");
-
 		// Creating a list to receive the list getQuestions() returns 
 		List<Questions> list = new ArrayList<Questions>();
 
@@ -173,8 +212,12 @@ public class Rest {
 	// ************************Methods for editing
 	// candidates*******************************
 
-	// Gets all candidates from database with Daojpa's getCandidates() into a list
-	// and sends it to adminbrowse.jsp
+	// Gets all candidates from database with Daojpa's getCandidates() into a list and sends it to adminbrowse.jsp
+	/**
+	 * Gets all candidates from database with Daojpa's getCandidates() into a list and sends it to adminbrowse.jsp
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/getcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -193,9 +236,14 @@ public class Rest {
 
 	}
 
-	// Gets candidate's id by @PathParam from adminbrowse.jsp, gets the candidate's
-	// info from database with Daojpa's readCandidate()
-	// and sends it forward to adminviewcand.jsp
+	// Gets candidate's id by @PathParam from adminbrowse.jsp, gets the candidate's info from database with Daojpa's readCandidate() and sends it forward to adminviewcand.jsp
+	/**
+	 * Gets candidate's id by @PathParam from adminbrowse.jsp, gets the candidate's info from database with Daojpa's readCandidate() 
+	 * and sends it forward to adminviewcand.jsp
+	 * @param cand_id
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/showcandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -215,9 +263,15 @@ public class Rest {
 		}
 	}
 
-	// Gets candidate's id by @PathParam from adminviewcand.jsp, gets the
-	// candidate's info from database with Daojpa's readCandidate()
+	// Gets candidate's id by @PathParam from adminviewcand.jsp, gets the candidate's info from database with Daojpa's readCandidate()
 	// and sends it forward to editcandidate.jsp
+	/**
+	 * Gets candidate's id by @PathParam from adminviewcand.jsp, gets the candidate's info from database with Daojpa's readCandidate()
+	 * and sends it forward to editcandidate.jsp
+	 * @param cand_id
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/editcandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -242,10 +296,27 @@ public class Rest {
 		}
 	}
 
-	// Gets candidates edited info by @FormParams from editcandidate.jsp,
-	// saves them to new Candidates object and sends it to Daojpa which makes the
-	// update to database and returns updated info from database
-	// and sends it to adminviewcand.jsp
+	// Gets candidates edited info by @FormParams from editcandidate.jsp, saves them to new Candidates object and sends it to Daojpa which makes the
+	// update to database and returns updated info from database and sends it to adminviewcand.jsp
+	/**
+	 * Gets candidates edited info by @FormParams from editcandidate.jsp, saves them to new Candidates object and sends it to Daojpa which makes the
+	 * update to database and returns updated info from database and sends it to adminviewcand.jsp
+	 * @param fileInputStream
+	 * @param fileMetaData
+	 * @param candid
+	 * @param picture
+	 * @param fname
+	 * @param lname
+	 * @param party
+	 * @param munic
+	 * @param age
+	 * @param prof
+	 * @param promo
+	 * @param request
+	 * @param response
+	 * @param sc
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/updatecandidate")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
@@ -272,13 +343,30 @@ public class Rest {
 		}
 	}
 
-	// Gets new candidates info using FormDataParams from addcandidate.jsp and saves
-	// the info
-	// to object Candidate. Then sends object to a daoJpa and saves candidates info
-	// to a database.
+	// Gets new candidates info using FormDataParams from addcandidate.jsp and saves the info
+	// to object Candidate. Then sends object to a daoJpa and saves candidates info to a database.
 	// After that method calls daojpas method "addAnswersToNewCandidate,
 	// finally in the end sends the object by setAttribute to a adminviewcand.jsp.
 
+	/**
+	 * Gets new candidates info using FormDataParams from addcandidate.jsp and saves the info
+	 * to object Candidate. Then sends object to a daoJpa and saves candidates info to a database.
+	 * After that method calls daojpas method "addAnswersToNewCandidate,
+	 * finally in the end sends the object by setAttribute to a adminviewcand.jsp.
+	 * @param fileInputStream
+	 * @param fileMetaData
+	 * @param fname
+	 * @param lname
+	 * @param party
+	 * @param munic
+	 * @param age
+	 * @param prof
+	 * @param promo
+	 * @param request
+	 * @param response
+	 * @param sc
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/addcandidate")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
@@ -289,17 +377,15 @@ public class Rest {
 			@FormDataParam("munic") String munic, @FormDataParam("age") String age, @FormDataParam("prof") String prof,
 			@FormDataParam("promo") String promo, @Context HttpServletRequest request,
 			@Context HttpServletResponse response, @Context ServletContext sc) throws Exception {
-		System.out.println("Coming here? addCandidate");
+		
 		String UPLOAD_PATH = sc.getRealPath("/pics");
-		System.out.println("addcandidate " + UPLOAD_PATH);
+
 		try {
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
 			OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
 
-			// OutputStream out = new FileOutputStream(new
-			// File(""+fileMetaData.getFileName()));
 			while ((read = fileInputStream.read(bytes)) != -1) {
 				out.write(bytes, 0, read);
 			}
@@ -312,12 +398,8 @@ public class Rest {
 		}
 
 		String picture = fileMetaData.getFileName();
-		System.out.println("updatecandidate" + picture);
-		// return pic;
-		// return Response.ok("Data ok" + UPLOAD_PATH).build();
 
 		Candidates c = new Candidates(lname, fname, picture, party, munic, age, promo, prof);
-		System.out.println("happens");
 		c = Daojpa.addCandidate(c);
 		Daojpa.addAnswersToNewCandidate();
 
@@ -332,9 +414,16 @@ public class Rest {
 
 	}
 
-	// Removes a candidate and answers related to given candidate_id.
-	// Refreshes the page by reading candidates from the database
+	// Removes a candidate and answers related to given candidate_id. Refreshes the page by reading candidates from the database
 	// Gets candidate_id from browsecandidates.jsp and send the refreshed list back to browsequestions.jsp
+	/**
+	 * 
+	 * Removes a candidate and answers related to given candidate_id. Refreshes the page by reading candidates from the database
+	 * Gets candidate_id from browsecandidates.jsp and send the refreshed list back to browsequestions.jsp
+	 * @param candidate_id
+	 * @param request
+	 * @param response
+	 */
 	@GET
 	@Path("/deletecandidate/{candidate_id}")
 	@Produces(MediaType.APPLICATION_JSON)
