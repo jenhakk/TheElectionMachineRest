@@ -1,12 +1,12 @@
 # TheElectionMachineRest
 
-Team:
-
-
 **This is the second part of The Election Machine project that uses REST**  
 [Here](https://github.com/jenhakk/TheElectionMachine) you can check the first part.
 
+Team: [Jenna Hakkarainen](https://github.com/jenhakk), [Amanda Karjalainen](https://github.com/amakarj), [Anna-Maria Palm](https://github.com/A-d-f)
+
 ## Task
+
 Our task was to continue with The Election Machine using **REST** and **JPA**.  
 In the first part we already used **JSP, database (MySQL) and HTML/CSS**. 
 
@@ -20,7 +20,7 @@ New features were:
  * Admin can add, edit and delete questions 
  * Admin can add, edit and delete candidates
  
-All data is saved in a local database and it is handled with **JPA**. The methods for JPA are in `Daojpa.java` and they are called from `Rest.java`. Data is transferred between the REST and JSP files with **RequestDispatcher**.
+All data is saved in **a local database** and it is handled with **JPA**. The methods for JPA are in `Daojpa.java` and they are called from `Rest.java`. Data is transferred between the REST and JSP files with **RequestDispatcher**.
 
 We added few extra features e.g.
  * login for the admin using **AuthFilter** 
