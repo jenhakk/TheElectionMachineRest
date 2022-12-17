@@ -3,7 +3,7 @@
 **This is the second part of The Election Machine project that uses REST**  
 [Check the first part here.](https://github.com/jenhakk/TheElectionMachine)
 
-I started creating the base for the site with HTML before it was transformed to jsp files. [Here](https://jenhakk.github.io/Base-for-Election-machine/index2.html) you can see little bit of the process of it and see the first raw (non-functional) version of the site.
+I started creating the base for the site with HTML before it was transformed to jsp files. [Here](https://jenhakk.github.io/Base-for-Election-machine/index2.html) you can see little bit of the process of it and see the first raw (non-functional) version of the site. Unfortunately it doesn't have the admin features.
 
 
 
