@@ -37,4 +37,4 @@ All in all, the second part came together quickly after we figured out how the d
  * *customized* confirmation window for deleting  
  
 
-If we had more time we would have wanted to create filtering for the candidates for example by party or municipality.
+**If we had more time we would have wanted to create filtering for the candidates for example by party or municipality.**
