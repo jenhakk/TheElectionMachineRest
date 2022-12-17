@@ -1,9 +1,13 @@
 # TheElectionMachineRest
 
 **This is the second part of The Election Machine project that uses REST**  
-[Here](https://github.com/jenhakk/TheElectionMachine) you can check the first part.
+[Check the first part here.](https://github.com/jenhakk/TheElectionMachine)
 
-Team: [Jenna Hakkarainen](https://github.com/jenhakk), [Amanda Karjalainen](https://github.com/amakarj), [Anna-Maria Palm](https://github.com/A-d-f)
+I started creating the base for the site with HTML before it was transformed to jsp files. [Here](https://jenhakk.github.io/Base-for-Election-machine/index2.html) you can see little bit of the process of it and see the first raw (non-functional) version of the site.
+
+
+
+
 
 ## Task
 
@@ -31,10 +35,13 @@ We added few extra features e.g.
 The project was fun to work with and we learned a lot. It was demanding and it helped develop our problem-solving skills. We only had few weeks to work with and there was a much to take in. The fact that we had to connect the first part of the project with this one added some extra challenge.  
 For example, we hadn’t thought how deleting questions and candidates would affect the functionality. We also had to re-create the database because we had used two primary keys instead of foreign keys.
 
-All in all, the second part came together quickly after we figured out how the data is being transferred. We succeeded to create functioning site and added few extra features like:
+All in all, the second part came together quickly after we figured out how the data is being transferred. We succeeded to create functioning site and added **few extra features** like:
  * adding candidate’s picture from local machine/project’s folder 
  * admin login 
  * *customized* confirmation window for deleting  
  
 
 **If we had more time we would have wanted to create filtering for the candidates for example by party or municipality.**
+
+
+Team: [Jenna Hakkarainen](https://github.com/jenhakk), [Amanda Karjalainen](https://github.com/amakarj), [Anna-Maria Palm](https://github.com/A-d-f)
